@@ -6,6 +6,9 @@
 //------------------------------------------------------------
 
 using System.IO;
+using System;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace GameFramework
 {
@@ -94,6 +97,52 @@ namespace GameFramework
                 {
                     return false;
                 }
+            }
+
+            public static void CopyFolder(string sourceFolder, string destFolder)
+            {
+                try
+                {
+                    if (!Directory.Exists(destFolder))
+                    {
+                        Directory.CreateDirectory(destFolder);
+                    }
+                    string[] files = Directory.GetFiles(sourceFolder);
+                    foreach (string file in files)
+                    {
+                        string name = System.IO.Path.GetFileName(file);
+                        string dest = System.IO.Path.Combine(destFolder, name);
+                        File.Copy(file, dest);
+                    }
+
+                    string[] folders = Directory.GetDirectories(sourceFolder);
+                    foreach (string folder in folders)
+                    {
+                        string name = System.IO.Path.GetFileName(folder);
+                        string dest = System.IO.Path.Combine(destFolder, name);
+                        CopyFolder(folder, dest);
+                    }
+
+                }
+                catch (Exception e)
+                {
+                    UnityEngine.Debug.LogError(e.Message);
+                }
+
+            }
+            
+            public static string GetFilePathWithoutExtension(string path)
+            {
+                int index = path.IndexOf('.');
+                if (index < 0)
+                    return path;
+                return path.Substring(0, index);
+            }
+            
+            public static string GetCompressedFileName(string url)
+            {
+                url = Regex.Replace(url, @"^jar:file:///", "");
+                return url.Substring(0, url.LastIndexOf("!"));
             }
         }
     }

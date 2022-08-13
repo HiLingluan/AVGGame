@@ -57,6 +57,8 @@ namespace UnityGameFramework.Runtime
         public override void ReleaseEntity(object entityAsset, object entityInstance)
         {
             m_ResourceComponent.UnloadAsset(entityAsset);
+            var obj =  entityInstance as GameObject;
+            obj.GetComponent<Entity>().OnRecycle();
             Destroy((Object)entityInstance);
         }
 

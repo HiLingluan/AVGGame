@@ -56,7 +56,7 @@ namespace JMatrix.Editor
 
         public void OnOutputUpdatableVersionListData(Platform platform, string versionListPath, int versionListLength, int versionListHashCode, int versionListCompressedLength, int versionListCompressedHashCode)
         {
-            ResourceVersionInfo resourceVersionInfo = new ResourceVersionInfo(versionFilePath, versionListLength, versionListHashCode, versionListCompressedLength, versionListCompressedHashCode);
+            ResourceVersionInfo resourceVersionInfo = new ResourceVersionInfo(versionListLength, versionListHashCode, versionListCompressedLength, versionListCompressedHashCode);
             if (Directory.Exists(versionFilePath))
             {
                 Directory.Delete(versionFilePath, true);

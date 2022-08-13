@@ -22,7 +22,7 @@ namespace UnityGameFramework.Runtime
         /// <summary>
         /// 默认调试器漂浮框大小。
         /// </summary>
-        internal static readonly Rect DefaultIconRect = new Rect(10f, 10f, 60f, 60f);
+        internal static readonly Rect DefaultIconRect = new Rect(200f, 10f, 60f, 60f);
 
         /// <summary>
         /// 默认调试器窗口大小。
@@ -32,7 +32,7 @@ namespace UnityGameFramework.Runtime
         /// <summary>
         /// 默认调试器窗口缩放比例。
         /// </summary>
-        internal static readonly float DefaultWindowScale = 1f;
+        internal static readonly float DefaultWindowScale = 2.0f;
 
         private static readonly TextEditor s_TextEditor = new TextEditor();
         private IDebuggerManager m_DebuggerManager = null;
@@ -217,6 +217,7 @@ namespace UnityGameFramework.Runtime
             RegisterDebuggerWindow("Other/Settings", m_SettingsWindow);
             RegisterDebuggerWindow("Other/Operations", m_OperationsWindow);
 
+#if ENABLE_LOG 
             switch (m_ActiveWindow)
             {
                 case DebuggerActiveWindowType.AlwaysOpen:
@@ -235,6 +236,9 @@ namespace UnityGameFramework.Runtime
                     ActiveWindow = false;
                     break;
             }
+#else
+        ActiveWindow = false;
+#endif
         }
 
         private void Update()

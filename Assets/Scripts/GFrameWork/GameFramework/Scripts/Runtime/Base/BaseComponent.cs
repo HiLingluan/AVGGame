@@ -21,11 +21,14 @@ namespace UnityGameFramework.Runtime
     public sealed class BaseComponent : GameFrameworkComponent
     {
         private const int DefaultDpi = 96;  // default windows dpi
-
+        public string ssssss;
         private float m_GameSpeedBeforePause = 1f;
 
         [SerializeField]
         private bool m_EditorResourceMode = true;
+
+        [SerializeField]
+        private string m_EditorLoginID = "";
 
         [SerializeField]
         private Language m_EditorLanguage = Language.Unspecified;
@@ -66,6 +69,20 @@ namespace UnityGameFramework.Runtime
             set
             {
                 m_EditorResourceMode = value;
+            }
+        }
+        /// <summary>
+        /// 获取或设置编辑器登录ID（仅编辑器内有效）。
+        /// </summary>
+        public string EditorLoginID
+        {
+            get
+            {
+                return m_EditorLoginID;
+            }
+            set
+            {
+                m_EditorLoginID = value;
             }
         }
 
@@ -203,6 +220,10 @@ namespace UnityGameFramework.Runtime
             if (m_EditorResourceMode)
             {
                 Log.Info("During this run, Game Framework will use editor resource files, which you should validate first.");
+            }
+            if(string.IsNullOrEmpty(m_EditorLoginID))
+            {
+                m_EditorLoginID = SystemInfo.deviceUniqueIdentifier; 
             }
 
             Application.targetFrameRate = m_FrameRate;

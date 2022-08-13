@@ -117,9 +117,14 @@ namespace GameFramework
                     throw new GameFrameworkException("Code length is invalid.");
                 }
 
+                if(length > bytes.Length)
+                {
+                    length = bytes.Length;
+                }
+
                 if (startIndex < 0 || length < 0 || startIndex + length > bytes.Length)
                 {
-                    throw new GameFrameworkException("Start index or length is invalid.");
+                    throw new GameFrameworkException("Start index or length is invalid.");  
                 }
 
                 int codeIndex = startIndex % codeLength;

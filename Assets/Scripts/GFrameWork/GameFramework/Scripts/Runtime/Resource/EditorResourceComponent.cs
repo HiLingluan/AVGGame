@@ -523,10 +523,10 @@ namespace UnityGameFramework.Runtime
         /// 资源更新全部完成事件。
         /// </summary>
         public event EventHandler<GameFramework.Resource.ResourceUpdateAllCompleteEventArgs> ResourceUpdateAllComplete = null;
-        public event EventHandler<ResourceVerifyStartEventArgs> ResourceVerifyStart;
-        public event EventHandler<ResourceVerifySuccessEventArgs> ResourceVerifySuccess;
-        public event EventHandler<ResourceVerifyFailureEventArgs> ResourceVerifyFailure;
-        public event EventHandler<ResourceApplyStartEventArgs> ResourceApplyStart;
+        public event EventHandler<GameFramework.Resource.ResourceVerifyStartEventArgs> ResourceVerifyStart;
+        public event EventHandler<GameFramework.Resource.ResourceVerifySuccessEventArgs> ResourceVerifySuccess;
+        public event EventHandler<GameFramework.Resource.ResourceVerifyFailureEventArgs> ResourceVerifyFailure;
+        public event EventHandler<GameFramework.Resource.ResourceApplyStartEventArgs> ResourceApplyStart;
 
 #pragma warning restore 0067, 0414
 

@@ -402,7 +402,8 @@ namespace UnityGameFramework.Runtime
 
         private void OnDownloadFailure(object sender, GameFramework.Download.DownloadFailureEventArgs e)
         {
-            Log.Warning("Download failure, download serial id '{0}', download path '{1}', download uri '{2}', error message '{3}'.", e.SerialId.ToString(), e.DownloadPath, e.DownloadUri, e.ErrorMessage);
+            string content = string.Format("Download failure, download serial id '{0}', download path '{1}', download uri '{2}', error message '{3}'.", e.SerialId.ToString(), e.DownloadPath, e.DownloadUri, e.ErrorMessage);
+            Log.Warning(content);
             m_EventComponent.Fire(this, DownloadFailureEventArgs.Create(e));
         }
     }

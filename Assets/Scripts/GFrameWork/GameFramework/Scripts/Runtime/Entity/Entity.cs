@@ -118,8 +118,9 @@ namespace UnityGameFramework.Runtime
                 Destroy(m_EntityLogic);
                 m_EntityLogic = null;
             }
-
-            m_EntityLogic = gameObject.AddComponent(entityLogicType) as EntityLogic;
+            //byZPF:修改为自己手动挂载
+            m_EntityLogic = gameObject.GetOrAddComponent(entityLogicType) as EntityLogic;
+            
             if (m_EntityLogic == null)
             {
                 Log.Error("Entity '{0}' can not add entity logic.", entityAssetName);

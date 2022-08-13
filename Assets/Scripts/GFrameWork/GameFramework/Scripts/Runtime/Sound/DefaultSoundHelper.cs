@@ -20,7 +20,6 @@ namespace UnityGameFramework.Runtime
         /// <param name="soundAsset">要释放的声音资源。</param>
         public override void ReleaseSoundAsset(object soundAsset)
         {
-            Log.Info("释放声音资源==============");
             m_ResourceComponent.UnloadAsset(soundAsset);
         }
 

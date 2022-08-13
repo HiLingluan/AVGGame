@@ -25,24 +25,33 @@ namespace UnityGameFramework.Runtime
             switch (level)
             {
                 case GameFrameworkLogLevel.Debug:
+#if ENABLE_LOG || ENABLE_DEBUG_LOG || ENABLE_DEBUG_AND_ABOVE_LOG
                     Debug.Log(Utility.Text.Format("<color=#888888>{0}</color>", message.ToString()));
+#endif
                     break;
 
                 case GameFrameworkLogLevel.Info:
+#if ENABLE_LOG || ENABLE_INFO_LOG || ENABLE_DEBUG_AND_ABOVE_LOG || ENABLE_INFO_AND_ABOVE_LOG
                     Debug.Log(message.ToString());
+#endif
                     break;
 
                 case GameFrameworkLogLevel.Warning:
+#if ENABLE_LOG || ENABLE_WARNING_LOG || ENABLE_DEBUG_AND_ABOVE_LOG || ENABLE_INFO_AND_ABOVE_LOG || ENABLE_WARNING_AND_ABOVE_LOG
                     Debug.LogWarning(message.ToString());
+#endif
                     break;
 
                 case GameFrameworkLogLevel.Error:
+#if ENABLE_LOG || ENABLE_ERROR_LOG || ENABLE_DEBUG_AND_ABOVE_LOG || ENABLE_INFO_AND_ABOVE_LOG || ENABLE_WARNING_AND_ABOVE_LOG || ENABLE_ERROR_AND_ABOVE_LOG
                     Debug.LogError(message.ToString());
+#endif
                     break;
 
                 default:
                     throw new GameFrameworkException(message.ToString());
             }
         }
+        
     }
 }

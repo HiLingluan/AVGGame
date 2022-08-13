@@ -879,6 +879,16 @@ namespace UnityGameFramework.Runtime
         }
 
         /// <summary>
+        /// 使用可更新模式并更新指定资源列表
+        /// </summary>
+        /// <param name="resNameList">资源列表</param>
+        /// <param name="updateResourcesCompleteCallback">使用可更新模式并更新指定资源组完成时的回调函数</param>
+        public void UpdateResources(List<string> resNameList, UpdateResourcesCompleteCallback updateResourcesCompleteCallback)
+        {
+            m_ResourceManager.UpdateResources(resNameList, updateResourcesCompleteCallback);
+        }
+
+        /// <summary>
         /// 停止更新资源。
         /// </summary>
         public void StopUpdateResources()
@@ -1456,16 +1466,10 @@ namespace UnityGameFramework.Runtime
             m_EventComponent.Fire(this, ResourceUpdateAllCompleteEventArgs.Create(e));
         }
 
+        //-------------------------------------------新添加------------------------------------------------
         public void LoadBytes(string abName, LoadBytesCallbacks callback, object userdata)
         {
-            if(ResourceMode == ResourceMode.Package)
-            {
-                m_ResourceHelper.LoadBytes(Utility.Path.GetRemotePath(Path.Combine(ReadOnlyPath, abName + ".dat")), callback, userdata);
-            }
-            else
-            {
-                m_ResourceHelper.LoadBytes(Utility.Path.GetRemotePath(Path.Combine(ReadWritePath, abName + ".dat")), callback, userdata);
-            }
+            m_ResourceHelper.LoadBytes(abName, callback, userdata);
 
             //if (ResourceMode == ResourceMode.Updatable)
             //{

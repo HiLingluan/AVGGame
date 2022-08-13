@@ -7,21 +7,14 @@ namespace JMatrix.Editor
     [SerializeField]
     public class ResourceVersionInfo
     {
-        public ResourceVersionInfo(string path, int length, int hashCode, int compressedLength, int compressedHashCode)
+        public ResourceVersionInfo(int length, int hashCode, int compressedLength, int compressedHashCode)
         {
-            Path = path;
             Length = length;
             HashCode = hashCode;
             CompressedLength = compressedLength;
             CompressedHashCode = compressedHashCode;
         }
-
-        public string Path
-        {
-            get;
-            private set;
-        }
-
+        
         public int Length
         {
             get;

@@ -89,7 +89,7 @@ namespace ZFight
                 return;
             }
 
-            AIUtility.PerformCollision(this, entity);
+            //AIUtility.PerformCollision(this, entity);
         }
     }
 }

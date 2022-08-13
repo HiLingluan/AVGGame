@@ -21,9 +21,15 @@ namespace JMatrix.Editor
             Platform platforms, AssetBundleCompressionType assetBundleCompression, string compressionHelperTypeName, bool additionalCompressionSelected, bool forceRebuildAssetBundleSelected, string buildEventHandlerTypeName, string outputDirectory, BuildAssetBundleOptions buildAssetBundleOptions,
             string workingPath, bool outputPackageSelected, string outputPackagePath, bool outputFullSelected, string outputFullPath, bool outputPackedSelected, string outputPackedPath, string buildReportPath)
         {
-            versionFilePath = buildReportPath.Replace("BuildReport", "Version");
+            versionFilePath = outputFullPath;
 
             string streamingAssetsPath = Utility.Path.GetRegularPath(Path.Combine(Application.dataPath, "StreamingAssets"));
+            if (!Directory.Exists(streamingAssetsPath))
+            {
+                Directory.CreateDirectory(streamingAssetsPath);
+                return;
+            }
+
             string[] fileNames = Directory.GetFiles(streamingAssetsPath, "*", SearchOption.AllDirectories);
             foreach (string fileName in fileNames)
             {
@@ -36,13 +42,35 @@ namespace JMatrix.Editor
             }
 
             Utility.Path.RemoveEmptyDirectory(streamingAssetsPath);
+
+
         }
 
         public void OnPostprocessAllPlatforms(string productName, string companyName, string gameIdentifier, string gameFrameworkVersion, string unityVersion, string applicableGameVersion, int internalResourceVersion,
             Platform platforms, AssetBundleCompressionType assetBundleCompression, string compressionHelperTypeName, bool additionalCompressionSelected, bool forceRebuildAssetBundleSelected, string buildEventHandlerTypeName, string outputDirectory, BuildAssetBundleOptions buildAssetBundleOptions,
             string workingPath, bool outputPackageSelected, string outputPackagePath, bool outputFullSelected, string outputFullPath, bool outputPackedSelected, string outputPackedPath, string buildReportPath)
         {
+#if UNITY_ANDROID
+            if (platforms != Platform.Android)
+            {
+                return;
+            }
+#endif
 
+#if UNITY_IOS
+            if (platforms != Platform.IOS)
+            {
+                return;
+            }    
+#endif
+            string streamingAssetsPath = Utility.Path.GetRegularPath(Path.Combine(Application.dataPath, "StreamingAssets"));
+
+            if (!Directory.Exists(streamingAssetsPath))
+            {
+                Directory.CreateDirectory(streamingAssetsPath);
+            }
+            string outputPackedPlatPath = Path.Combine(outputPackedPath + platforms.ToString());
+            Utility.Path.CopyFolder(outputPackedPlatPath, streamingAssetsPath);
         }
 
         public void OnPreprocessPlatform(Platform platform, string workingPath, bool outputPackageSelected, string outputPackagePath, bool outputFullSelected, string outputFullPath, bool outputPackedSelected, string outputPackedPath)
@@ -56,55 +84,19 @@ namespace JMatrix.Editor
 
         public void OnOutputUpdatableVersionListData(Platform platform, string versionListPath, int versionListLength, int versionListHashCode, int versionListCompressedLength, int versionListCompressedHashCode)
         {
-            ResourceVersionInfo resourceVersionInfo = new ResourceVersionInfo(versionFilePath, versionListLength, versionListHashCode, versionListCompressedLength, versionListCompressedHashCode);
-            if (Directory.Exists(versionFilePath))
+            ResourceVersionInfo resourceVersionInfo = new ResourceVersionInfo(versionListLength, versionListHashCode, versionListCompressedLength, versionListCompressedHashCode);
+            string versionFilePlatformPath = versionFilePath + platform.ToString();
+            if (!Directory.Exists(versionFilePlatformPath))
             {
-                Directory.Delete(versionFilePath, true);
+                Directory.CreateDirectory(versionFilePlatformPath);
             }
-            Directory.CreateDirectory(versionFilePath);
-
-            string fullPath = versionFilePath + "Version.txt";
+            string fullPath = versionFilePlatformPath + "/Version.txt";
             File.WriteAllText(fullPath,LitJson.JsonMapper.ToJson(resourceVersionInfo));
         }
 
         public void OnPostprocessPlatform(Platform platform, string workingPath, bool outputPackageSelected, string outputPackagePath, bool outputFullSelected, string outputFullPath, bool outputPackedSelected, string outputPackedPath, bool isSuccess)
         {
-            if (!outputPackageSelected)
-            {
-                return;
-            }
-
-#if UNITY_ANDROID
-            if (platform != Platform.Android)
-            {
-                return;
-            }
-#endif
-
-#if UNITY_IOS
-            if (platform != Platform.IOS)
-            {
-                return;
-            }    
-#endif
-            string streamingAssetsPath = Utility.Path.GetRegularPath(Path.Combine(Application.dataPath, "StreamingAssets"));
-
-            if (!Directory.Exists(streamingAssetsPath))
-            {
-                Directory.CreateDirectory(streamingAssetsPath);
-            }
-            string[] fileNames = Directory.GetFiles(outputPackedPath, "*", SearchOption.AllDirectories);
-            foreach (string fileName in fileNames)
-            {
-                string destFileName = Utility.Path.GetRegularPath(Path.Combine(streamingAssetsPath, fileName.Substring(outputPackedPath.Length)));
-                FileInfo destFileInfo = new FileInfo(destFileName);
-                if (!destFileInfo.Directory.Exists)
-                {
-                    destFileInfo.Directory.Create();
-                }
-
-                File.Copy(fileName, destFileName);
-            }
+           
         }
     }
 }

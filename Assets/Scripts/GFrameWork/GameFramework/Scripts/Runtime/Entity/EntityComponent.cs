@@ -1124,7 +1124,8 @@ namespace UnityGameFramework.Runtime
 
         private void OnShowEntityFailure(object sender, GameFramework.Entity.ShowEntityFailureEventArgs e)
         {
-            Log.Warning("Show entity failure, entity id '{0}', asset name '{1}', entity group name '{2}', error message '{3}'.", e.EntityId.ToString(), e.EntityAssetName, e.EntityGroupName, e.ErrorMessage);
+            string content = string.Format("Show entity failure, entity id '{0}', asset name '{1}', entity group name '{2}', error message '{3}'.", e.EntityId.ToString(), e.EntityAssetName, e.EntityGroupName, e.ErrorMessage);
+            Log.Warning(content);
             m_EventComponent.Fire(this, ShowEntityFailureEventArgs.Create(e));
         }
 

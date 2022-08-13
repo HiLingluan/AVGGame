@@ -19,7 +19,6 @@ namespace UnityGameFramework.Runtime
         private sealed class ConsoleWindow : IDebuggerWindow
         {
             private readonly Queue<LogNode> m_LogNodes = new Queue<LogNode>();
-
             private SettingComponent m_SettingComponent = null;
             private Vector2 m_LogScrollPosition = Vector2.zero;
             private Vector2 m_StackScrollPosition = Vector2.zero;
@@ -279,7 +278,7 @@ namespace UnityGameFramework.Runtime
                     m_SettingComponent.SetBool("Debugger.Console.FatalFilter", m_FatalFilter);
                 }
             }
-
+            
             public void OnDraw()
             {
                 RefreshCount();
@@ -290,12 +289,47 @@ namespace UnityGameFramework.Runtime
                     {
                         Clear();
                     }
-                    m_LockScroll = GUILayout.Toggle(m_LockScroll, "Lock Scroll", GUILayout.Width(90f));
+
+                    if(GUILayout.Button("Lock Scroll", GUILayout.Width(90f)))
+                    {
+                        m_LockScroll = !m_LockScroll;
+                    }
+
+                    //m_LockScroll = GUILayout.Toggle(m_LockScroll, "Lock Scroll", GUILayout.Width(90f));
                     GUILayout.FlexibleSpace();
-                    m_InfoFilter = GUILayout.Toggle(m_InfoFilter, Utility.Text.Format("Info ({0})", m_InfoCount.ToString()), GUILayout.Width(90f));
-                    m_WarningFilter = GUILayout.Toggle(m_WarningFilter, Utility.Text.Format("Warning ({0})", m_WarningCount.ToString()), GUILayout.Width(90f));
-                    m_ErrorFilter = GUILayout.Toggle(m_ErrorFilter, Utility.Text.Format("Error ({0})", m_ErrorCount.ToString()), GUILayout.Width(90f));
-                    m_FatalFilter = GUILayout.Toggle(m_FatalFilter, Utility.Text.Format("Fatal ({0})", m_FatalCount.ToString()), GUILayout.Width(90f));
+
+                    if(GUILayout.Button(Utility.Text.Format("Info ({0})", m_InfoCount.ToString()), GUILayout.Width(90f)))
+                    {
+                        m_InfoFilter = !m_InfoFilter;
+                        m_WarningFilter = false;
+                        m_ErrorFilter = false;
+                        m_FatalFilter = false;
+                    }
+                    //m_InfoFilter = GUILayout.Toggle(m_InfoFilter, Utility.Text.Format("Info ({0})", m_InfoCount.ToString()), GUILayout.Width(90f));
+                    if (GUILayout.Button(Utility.Text.Format("Warning ({0})", m_WarningCount.ToString()), GUILayout.Width(90f)))
+                    {
+                        m_InfoFilter = false;
+                        m_WarningFilter = !m_WarningFilter;
+                        m_ErrorFilter = false;
+                        m_FatalFilter = false;
+                    }
+                    //m_WarningFilter = GUILayout.Toggle(m_WarningFilter, Utility.Text.Format("Warning ({0})", m_WarningCount.ToString()), GUILayout.Width(90f));
+                    if (GUILayout.Button(Utility.Text.Format("Error ({0})", m_ErrorCount.ToString()), GUILayout.Width(90f)))
+                    {
+                        m_WarningFilter = false;
+                        m_InfoFilter = false;
+                        m_ErrorFilter = !m_ErrorFilter;
+                        m_FatalFilter = false;
+                    }
+                    //m_ErrorFilter = GUILayout.Toggle(m_ErrorFilter, Utility.Text.Format("Error ({0})", m_ErrorCount.ToString()), GUILayout.Width(90f));
+                    if (GUILayout.Button(Utility.Text.Format("Fatal ({0})", m_FatalCount.ToString()), GUILayout.Width(90f)))
+                    {
+                        m_WarningFilter = false;
+                        m_InfoFilter = false;
+                        m_ErrorFilter = false;
+                        m_FatalFilter = !m_FatalFilter;
+                    }
+                    //m_FatalFilter = GUILayout.Toggle(m_FatalFilter, Utility.Text.Format("Fatal ({0})", m_FatalCount.ToString()), GUILayout.Width(90f));
                 }
                 GUILayout.EndHorizontal();
 
@@ -305,7 +339,6 @@ namespace UnityGameFramework.Runtime
                     {
                         m_LogScrollPosition.y = float.MaxValue;
                     }
-
                     m_LogScrollPosition = GUILayout.BeginScrollView(m_LogScrollPosition);
                     {
                         bool selected = false;
@@ -341,7 +374,8 @@ namespace UnityGameFramework.Runtime
                                     }
                                     break;
                             }
-                            if (GUILayout.Toggle(m_SelectedNode == logNode, GetLogString(logNode)))
+
+                            if (GUILayout.Toggle(m_SelectedNode == logNode, GetLogShortString(logNode),GUILayout.Height(20)))
                             {
                                 selected = true;
                                 if (m_SelectedNode != logNode)
@@ -480,6 +514,15 @@ namespace UnityGameFramework.Runtime
                 return Utility.Text.Format("<color=#{0}{1}{2}{3}>[{4}][{5}] {6}</color>",
                     color.r.ToString("x2"), color.g.ToString("x2"), color.b.ToString("x2"), color.a.ToString("x2"),
                     logNode.LogTime.ToLocalTime().ToString("HH:mm:ss.fff"), logNode.LogFrameCount.ToString(), logNode.LogMessage);
+            }
+
+            private string GetLogShortString(LogNode logNode)
+            {
+                Color32 color = GetLogStringColor(logNode.LogType);
+                int subLength = logNode.LogMessage.Length >=40 ? 40 : logNode.LogMessage.Length;
+                return Utility.Text.Format("<color=#{0}{1}{2}{3}>[{4}][{5}] {6}</color>",
+                   color.r.ToString("x2"), color.g.ToString("x2"), color.b.ToString("x2"), color.a.ToString("x2"),
+                   logNode.LogTime.ToLocalTime().ToString("HH:mm:ss.fff"), logNode.LogFrameCount.ToString(), logNode.LogMessage.Substring(0, subLength));
             }
 
             internal Color32 GetLogStringColor(LogType logType)
