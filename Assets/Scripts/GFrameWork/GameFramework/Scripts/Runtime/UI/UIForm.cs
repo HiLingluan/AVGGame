@@ -21,6 +21,7 @@ namespace UnityGameFramework.Runtime
         private IUIGroup m_UIGroup;
         private int m_DepthInUIGroup;
         private bool m_PauseCoveredUIForm;
+        //UI 和 Logic分开
         private UIFormLogic m_UIFormLogic;
 
         /// <summary>

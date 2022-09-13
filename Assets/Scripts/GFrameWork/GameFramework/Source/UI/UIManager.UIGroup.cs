@@ -400,6 +400,7 @@ namespace GameFramework.UI
                 {
                     LinkedListNode<UIFormInfo> next = current.Next;
                     current.Value.UIForm.OnDepthChanged(Depth, depth--);
+                    //层级改变时可能会销毁当前界面
                     if (current.Value == null)
                     {
                         return;

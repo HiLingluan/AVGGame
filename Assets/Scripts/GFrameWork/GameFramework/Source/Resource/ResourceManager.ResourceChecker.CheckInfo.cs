@@ -269,6 +269,7 @@ namespace GameFramework.Resource
                             m_Status = CheckStatus.StorageInReadOnly;
                             m_NeedRemove = m_ReadWriteInfo.Exist;
                         }
+                        //文件不变则检测文件系统是否一致，判断是否需要移动至读写目录
                         else if (m_ReadWriteInfo.Exist && m_ReadWriteInfo.LoadType == m_VersionInfo.LoadType && m_ReadWriteInfo.Length == m_VersionInfo.Length && m_ReadWriteInfo.HashCode == m_VersionInfo.HashCode)
                         {
                             bool differentFileSystem = m_ReadWriteInfo.FileSystemName != m_VersionInfo.FileSystemName;
