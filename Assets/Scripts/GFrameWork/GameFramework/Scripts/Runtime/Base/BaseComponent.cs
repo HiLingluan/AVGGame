@@ -28,9 +28,6 @@ namespace UnityGameFramework.Runtime
         private bool m_EditorResourceMode = true;
 
         [SerializeField]
-        private string m_EditorLoginID = "";
-
-        [SerializeField]
         private Language m_EditorLanguage = Language.Unspecified;
 
         [SerializeField]
@@ -71,21 +68,7 @@ namespace UnityGameFramework.Runtime
                 m_EditorResourceMode = value;
             }
         }
-        /// <summary>
-        /// 获取或设置编辑器登录ID（仅编辑器内有效）。
-        /// </summary>
-        public string EditorLoginID
-        {
-            get
-            {
-                return m_EditorLoginID;
-            }
-            set
-            {
-                m_EditorLoginID = value;
-            }
-        }
-
+        
         /// <summary>
         /// 获取或设置编辑器语言（仅编辑器内有效）。
         /// </summary>
@@ -221,11 +204,7 @@ namespace UnityGameFramework.Runtime
             {
                 Log.Info("During this run, Game Framework will use editor resource files, which you should validate first.");
             }
-            if(string.IsNullOrEmpty(m_EditorLoginID))
-            {
-                m_EditorLoginID = SystemInfo.deviceUniqueIdentifier; 
-            }
-
+            
             Application.targetFrameRate = m_FrameRate;
             Time.timeScale = m_GameSpeed;
             Application.runInBackground = m_RunInBackground;

@@ -43,13 +43,7 @@ namespace GameFramework.DataTable
         /// </summary>
         /// <param name="dataProviderHelper">数据表数据提供者辅助器。</param>
         void SetDataProviderHelper(IDataProviderHelper<DataTableBase> dataProviderHelper);
-
-        /// <summary>
-        /// 设置数据表辅助器。
-        /// </summary>
-        /// <param name="dataTableHelper">数据表辅助器。</param>
-        void SetDataTableHelper(IDataTableHelper dataTableHelper);
-
+        
         /// <summary>
         /// 确保二进制流缓存分配足够大小的内存并缓存。
         /// </summary>

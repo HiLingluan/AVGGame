@@ -148,7 +148,6 @@ namespace GameFramework.Resource
                             string resourcePath = Utility.Path.GetRegularPath(Path.Combine(m_ResourceManager.m_ReadWritePath, resourceFullName));
                             if (ci.NeedMoveToDisk)
                             {
-                                //获取或创建文件系统
                                 IFileSystem fileSystem = m_ResourceManager.GetFileSystem(ci.ReadWriteFileSystemName, false);
                                 if (!fileSystem.SaveAsFile(resourceFullName, resourcePath))
                                 {
@@ -281,7 +280,6 @@ namespace GameFramework.Resource
                     m_ResourceManager.m_ReadWriteResourceInfos = new SortedDictionary<ResourceName, ReadWriteResourceInfo>(new ResourceNameComparer());
                     ResourceGroup defaultResourceGroup = m_ResourceManager.GetOrAddResourceGroup(string.Empty);
 
-                    //只处理当前变体
                     foreach (UpdatableVersionList.FileSystem fileSystem in fileSystems)
                     {
                         int[] resourceIndexes = fileSystem.GetResourceIndexes();

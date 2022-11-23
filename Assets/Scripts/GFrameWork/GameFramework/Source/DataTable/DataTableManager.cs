@@ -19,7 +19,6 @@ namespace GameFramework.DataTable
         private readonly Dictionary<TypeNamePair, DataTableBase> m_DataTables;
         private IResourceManager m_ResourceManager;
         private IDataProviderHelper<DataTableBase> m_DataProviderHelper;
-        private IDataTableHelper m_DataTableHelper;
 
         /// <summary>
         /// 初始化数据表管理器的新实例。
@@ -29,7 +28,6 @@ namespace GameFramework.DataTable
             m_DataTables = new Dictionary<TypeNamePair, DataTableBase>();
             m_ResourceManager = null;
             m_DataProviderHelper = null;
-            m_DataTableHelper = null;
         }
 
         /// <summary>
@@ -102,20 +100,6 @@ namespace GameFramework.DataTable
             }
 
             m_DataProviderHelper = dataProviderHelper;
-        }
-
-        /// <summary>
-        /// 设置数据表辅助器。
-        /// </summary>
-        /// <param name="dataTableHelper">数据表辅助器。</param>
-        public void SetDataTableHelper(IDataTableHelper dataTableHelper)
-        {
-            if (dataTableHelper == null)
-            {
-                throw new GameFrameworkException("Data table helper is invalid.");
-            }
-
-            m_DataTableHelper = dataTableHelper;
         }
 
         /// <summary>

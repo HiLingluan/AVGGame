@@ -17,7 +17,7 @@ namespace GameFramework.Resource
         private sealed partial class ResourceLoader
         {
             /// <summary>
-            /// 加载资源代理。
+            /// 加载资源任务代理。
             /// </summary>
             private sealed partial class LoadResourceAgent : ITaskAgent<LoadResourceTaskBase>
             {

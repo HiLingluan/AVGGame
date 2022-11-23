@@ -23,6 +23,7 @@ namespace UnityGameFramework.Runtime
     /// </summary>
     public class DefaultLoadResourceAgentHelper : LoadResourceAgentHelperBase, IDisposable
     {
+        #region 属性
         private string m_FileFullPath = null;
         private string m_FileName = null;
         private string m_BytesFullPath = null;
@@ -135,6 +136,7 @@ namespace UnityGameFramework.Runtime
                 m_LoadResourceAgentHelperErrorEventHandler -= value;
             }
         }
+        #endregion
 
         /// <summary>
         /// 通过加载资源代理辅助器开始异步读取资源文件。
@@ -365,7 +367,9 @@ namespace UnityGameFramework.Runtime
 
             m_Disposed = true;
         }
-
+        /// <summary>
+        /// update轮询检测异步加载是否完成
+        /// </summary>
         private void Update()
         {
 #if UNITY_5_4_OR_NEWER

@@ -12,7 +12,7 @@ using UnityEngine;
 namespace UnityGameFramework.Runtime
 {
     /// <summary>
-    /// 数据结点组件。
+    /// 数据结点组件。 将任意类型的数据以树状结构的形式进行保存，用于管理游戏运行时的各种数据。
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("Game Framework/Data Node")]

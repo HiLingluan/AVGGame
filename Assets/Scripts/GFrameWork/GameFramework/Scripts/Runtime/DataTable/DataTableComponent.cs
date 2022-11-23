@@ -24,6 +24,7 @@ namespace UnityGameFramework.Runtime
         private const int DefaultPriority = 0;
 
         private IDataTableManager m_DataTableManager = null;
+
         private EventComponent m_EventComponent = null;
 
         [SerializeField]
@@ -116,7 +117,6 @@ namespace UnityGameFramework.Runtime
             transform.localScale = Vector3.one;
 
             m_DataTableManager.SetDataProviderHelper(dataTableHelper);
-            m_DataTableManager.SetDataTableHelper(dataTableHelper);
             if (m_CachedBytesSize > 0)
             {
                 EnsureCachedBytesSize(m_CachedBytesSize);

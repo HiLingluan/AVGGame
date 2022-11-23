@@ -18,12 +18,13 @@ using UnityEngine;
 namespace UnityGameFramework.Runtime
 {
     /// <summary>
-    /// 资源组件。
+    /// 资源组件。 代理ResourceManager
     /// </summary>
     [DisallowMultipleComponent]
     [AddComponentMenu("Game Framework/Resource")]
     public sealed class ResourceComponent : GameFrameworkComponent
     {
+        #region 属性
         private const int DefaultPriority = 0;
         private const int OneMegaBytes = 1024 * 1024;
 
@@ -581,6 +582,8 @@ namespace UnityGameFramework.Runtime
             }
         }
 
+        #endregion
+
         /// <summary>
         /// 游戏框架组件初始化。
         /// </summary>
@@ -698,7 +701,7 @@ namespace UnityGameFramework.Runtime
                 m_LastUnloadUnusedAssetsOperationElapseSeconds = 0f;
                 m_AsyncOperation = Resources.UnloadUnusedAssets();
             }
-
+            //Unload完成再GC
             if (m_AsyncOperation != null && m_AsyncOperation.isDone)
             {
                 m_AsyncOperation = null;
@@ -1464,21 +1467,6 @@ namespace UnityGameFramework.Runtime
         private void OnResourceUpdateAllComplete(object sender, GameFramework.Resource.ResourceUpdateAllCompleteEventArgs e)
         {
             m_EventComponent.Fire(this, ResourceUpdateAllCompleteEventArgs.Create(e));
-        }
-
-        //-------------------------------------------新添加------------------------------------------------
-        public void LoadBytes(string abName, LoadBytesCallbacks callback, object userdata)
-        {
-            m_ResourceHelper.LoadBytes(abName, callback, userdata);
-
-            //if (ResourceMode == ResourceMode.Updatable)
-            //{
-            //    m_ResourceHelper.LoadBytes(Utility.Path.GetRemotePath(Path.Combine(ReadWritePath, abName + ".dat")), callback, userdata);
-            //}
-            //else if (ResourceMode == ResourceMode.Package)
-            //{
-            //    m_ResourceHelper.LoadBytes(Utility.Path.GetRemotePath(Path.Combine(ReadOnlyPath, abName + ".dat")), callback, userdata);
-            //}
         }
     }
 }

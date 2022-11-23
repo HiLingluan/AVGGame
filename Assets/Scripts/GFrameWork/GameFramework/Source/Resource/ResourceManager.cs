@@ -2450,16 +2450,6 @@ namespace GameFramework.Resource
             m_ResourceVerifier = null;
         }
 
-        /// <summary>
-        /// 资源检测刷新委托
-        /// </summary>
-        /// <param name="resourceName"></param>
-        /// <param name="fileSystemName"></param>
-        /// <param name="loadType"></param>
-        /// <param name="length"></param>
-        /// <param name="hashCode"></param>
-        /// <param name="compressedLength"></param>
-        /// <param name="compressedHashCode"></param>
         private void OnCheckerResourceNeedUpdate(ResourceName resourceName, string fileSystemName, LoadType loadType, int length, int hashCode, int compressedLength, int compressedHashCode)
         {
             m_ResourceUpdater.AddResourceUpdate(resourceName, fileSystemName, loadType, length, hashCode, compressedLength, compressedHashCode, Utility.Path.GetRegularPath(Path.Combine(m_ReadWritePath, resourceName.FullName)));

@@ -1427,6 +1427,10 @@ namespace UnityGameFramework.Editor.ResourceTools
                 buildOptions |= BuildAssetBundleOptions.ChunkBasedCompression;
             }
 
+            buildOptions |= BuildAssetBundleOptions.DisableWriteTypeTree;
+            buildOptions |= BuildAssetBundleOptions.DisableLoadAssetByFileNameWithExtension;
+            buildOptions |= BuildAssetBundleOptions.DisableLoadAssetByFileName;
+
             return buildOptions;
         }
 

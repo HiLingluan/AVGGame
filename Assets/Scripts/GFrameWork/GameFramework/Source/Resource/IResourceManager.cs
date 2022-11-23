@@ -414,7 +414,7 @@ namespace GameFramework.Resource
         void SetDecryptResourceCallback(DecryptResourceCallback decryptResourceCallback);
 
         /// <summary>
-        /// 设置资源辅助器。
+        /// 设置资源卸载管理辅助器。
         /// </summary>
         /// <param name="resourceHelper">资源辅助器。</param>
         void SetResourceHelper(IResourceHelper resourceHelper);

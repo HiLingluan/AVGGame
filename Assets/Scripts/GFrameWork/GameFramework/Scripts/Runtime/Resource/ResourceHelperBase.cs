@@ -11,7 +11,7 @@ using UnityEngine;
 namespace UnityGameFramework.Runtime
 {
     /// <summary>
-    /// 资源辅助器基类。
+    /// 资源辅助器基类。主要用于unity一些特殊接口,其他通用的加载接口都在ResourceLoader中
     /// </summary>
     public abstract class ResourceHelperBase : MonoBehaviour, IResourceHelper
     {
