@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 版本检查流程

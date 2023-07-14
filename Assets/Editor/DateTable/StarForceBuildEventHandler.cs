@@ -11,9 +11,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityGameFramework.Editor.ResourceTools;
 
-namespace ZFight.Editor
+namespace Game.Editor
 {
-    public sealed class ZFightBuildEventHandler : IBuildEventHandler
+    public sealed class GameBuildEventHandler : IBuildEventHandler
     {
         public bool ContinueOnFailure
         {

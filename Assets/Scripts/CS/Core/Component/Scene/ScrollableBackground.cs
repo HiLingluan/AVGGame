@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     public class ScrollableBackground : MonoBehaviour
     {

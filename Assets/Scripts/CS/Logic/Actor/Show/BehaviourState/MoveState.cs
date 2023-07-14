@@ -1,6 +1,6 @@
 ﻿using GameFramework.Fsm;
 using UnityGameFramework.Runtime;
-namespace ZFight.Show
+namespace Game.Show
 {
     /// <summary>
     /// 移动表现层

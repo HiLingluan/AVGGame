@@ -9,7 +9,7 @@ using GameFramework;
 using GameFramework.ObjectPool;
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     public class HPBarItemObject : ObjectBase
     {

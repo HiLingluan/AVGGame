@@ -1,0 +1,125 @@
+--
+--des:{定时器}
+-- Author:{zpf]}
+-- Date: 2023-02-24 17:15:31
+--
+Timer = class("Timer")
+----------------------------------------------------
+
+local CallBackData = class("CallBackData")
+
+function CallBackData:initProperty()
+    self.frequence = 0                  --频率
+    self.data = nil                     --回调数据
+    self.nowTime = 0                    --现在的时间
+    self.times = 0                      --总共回调的次数
+    self.isNextFrame = false            --是否下一帧回调
+    self.isDestroy = false              --是否已经移除
+    self.cbFun = nil                    --回调函数
+end
+
+
+------------------------------------
+function Timer:ctor()
+    self:initProperty()
+    self:addEvent()
+end
+
+function Timer:initProperty()
+    self.callBackDatas = {}             --回调事件列表
+
+end
+
+function Timer:addEvent()
+    EventMgr.Add(LuaEventKey.ENTER_FRAME, self.update, self)
+end
+
+function Timer:update(deltaTime,unScaleDeltaTime)
+    if #self.callBackDatas <= 0 then return end
+    for i=#self.callBackDatas,1,-1 do
+        local data = self.callBackDatas[i]
+        local isContinue = true
+        if data.isNextFrame then
+            data.isNextFrame = false
+            isContinue = false
+        end
+        if isContinue then
+            if data.isDestroy then
+                table.remove(self.callBackDatas,i)
+                isContinue = false
+            end
+
+            if isContinue then
+                data.nowTime =  data.nowTime + deltaTime
+
+                if data.nowTime >= data.frequence then
+                    data.nowTime = 0;
+                    if data.times ~= -1 then data.times = data.times - 1 end---1为无限循环，所以不用减少次数
+
+                    if data.times == 0 then
+                        table.remove(self.callBackDatas,i)
+                    end
+
+                    if not data.cbFun then
+                        data.isDestroy = true
+                    else
+                        data.cbFun(data.data)
+                    end
+                end
+            end
+        end
+    end
+end
+
+function Timer:dispose()
+    EventMgr.Remove(LuaEventKey.ENTER_FRAME, self.update)
+end
+
+function Timer:AddDelayCallBack(time, times, callBack,data, isNextFrame)
+    if time == 0 and not isNextFrame then
+        if callBack then
+             callBack(data) 
+        end
+        return
+    end
+
+    local cbd = self:GetCallBackData(callBack)
+    if not cbd then
+        cbd = CallBackData()
+        table.insert(self.callBackDatas,cbd)
+    end
+    cbd.frequence = time
+    cbd.data = data
+    cbd.nowTime = 0
+    cbd.times = times
+    cbd.isNextFrame = isNextFrame
+    cbd.cbFun = callBack
+    cbd.isDestroy = false
+end
+
+function Timer:AddDelayCallBackNextFrame(callBack, data)
+    self:AddDelayCallBack(0,1,callBack,data,true)
+end
+
+function Timer:RemoveDelayCallBack(callBack)
+    if not callBack then return end
+    local cbd = self:GetCallBackData(callBack)
+    if cbd then
+        cbd.isDestroy = true
+    end
+end
+
+function Timer:RemoveAllCallBacks()
+    self.callBackDatas = {}
+end
+
+function Timer:GetCallBackData(callBack) 
+    for i,v in ipairs(self.callBackDatas) do
+        if v.cbFun == callBack then
+             return v 
+        end
+    end
+    return nil
+end
+
+Timer:ctor()

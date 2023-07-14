@@ -9,7 +9,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     public static class BinaryReaderExtension
     {

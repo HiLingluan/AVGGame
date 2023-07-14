@@ -8,7 +8,7 @@
 using GameFramework.Network;
 using ProtoBuf;
 
-namespace ZFight
+namespace Game
 {
     public abstract class PacketBase : Packet, IExtensible
     {

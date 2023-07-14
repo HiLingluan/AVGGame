@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 游戏入口。

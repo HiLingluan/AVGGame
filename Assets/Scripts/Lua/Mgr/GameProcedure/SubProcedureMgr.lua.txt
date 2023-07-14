@@ -1,0 +1,90 @@
+-- des:{子流程管理}
+-- author:{lideling}
+-- date: 2021-12-16 09:33:00
+--
+
+SubProcedureMgr = class("SubProcedureMgr")
+
+local config = 
+{
+    [Define.EDateProcedure.BeatGamePlay] = "Logic.Date.SubProcedure.GamePlay.BeatGamePlay",
+    [Define.EDateProcedure.JointTextureGamePlay] = "Logic.Date.SubProcedure.GamePlay.JointTextureGamePlay",
+    [Define.EDateProcedure.OpenScreenGamePlay] = "Logic.Date.SubProcedure.GamePlay.OpenScreenGamePlay",
+    [Define.EDateProcedure.PackGamePlay] = "Logic.Date.SubProcedure.GamePlay.PackGamePlay",
+    [Define.EDateProcedure.ScratchGamePlay] = "Logic.Date.SubProcedure.GamePlay.ScratchGamePlay",
+    [Define.EDateProcedure.SearchGamePlay] = "Logic.Date.SubProcedure.GamePlay.SearchGamePlay",
+    [Define.EDateProcedure.TouchGamePlay] = "Logic.Date.SubProcedure.GamePlay.TouchGamePlay",
+    [Define.EDateProcedure.Dating] = "Logic.Date.SubProcedure.DatingProcedure",
+    [Define.EDateProcedure.DateEnd] = "Logic.Date.SubProcedure.DateEndProcedure",
+    [Define.EDateProcedure.Opening] = "Logic.Date.SubProcedure.GamePlay.OpenScreenGamePlay",
+    [Define.EDateProcedure.Playing] = "Logic.Date.SubProcedure.DatePlayingProcedure"
+}
+
+
+function SubProcedureMgr:ctor()
+    self:initProperty()
+    self:init()
+end
+
+function SubProcedureMgr:initProperty()
+    self.fsm = nil
+end
+
+--理论上不需要override的概念
+function SubProcedureMgr:init(...)
+    --self.fsm = FSMMgr:createFsm("SubProcedure",self,)
+end
+
+function SubProcedureMgr:addProcedure(baseState)
+    if nil == self.fsm then
+        self.fsm = FSMMgr:createFsm("SubProcedure" , self , baseState);
+    else
+        self.fsm:addState(baseState , self);
+    end
+end
+
+function SubProcedureMgr:startProcedure(type)
+    self:check(type);
+    self.fsm:changeState(type)
+end
+
+function SubProcedureMgr:changeProcedure(type)
+    self:check(type);
+    self.fsm:changeState(type)
+end
+
+function SubProcedureMgr:check(type)
+    if not self.fsm:hasState(type) then
+        local className = config[type]
+        if not className then
+            LogError("不存在流程===="..tostring(type))
+            return
+        end
+        local procedure = require(className)
+        self.fsm:addState(procedure(),self)
+    end
+end
+
+
+function SubProcedureMgr:getProcedure(type)
+    return self.fsm:getState(type)
+end
+
+function SubProcedureMgr:hasProcedure(type)
+    return self.fsm:hasState(type)
+end
+
+--获取当前流程
+function SubProcedureMgr:getCurrentProcedure()
+    return self.fsm.currentState
+end
+--关闭状态机同时清除状态
+function SubProcedureMgr:shutDown()
+    self.fsm:dispose()
+    --LogWarn("not implement")
+end
+
+
+SubProcedureMgr:ctor()
+
+--return SubProcedureMgr;

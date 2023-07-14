@@ -10,7 +10,7 @@ using GameFramework.Localization;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public class ChangeLanguageDebuggerWindow : IDebuggerWindow
     {

@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// uGUI 界面组辅助器。

@@ -11,7 +11,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public abstract class UGuiForm : UIFormLogic
     {

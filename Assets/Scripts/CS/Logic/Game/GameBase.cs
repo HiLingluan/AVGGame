@@ -9,7 +9,7 @@ using GameFramework.Event;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public abstract class GameBase
     {

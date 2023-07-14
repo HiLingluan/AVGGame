@@ -1,7 +1,7 @@
 ﻿using GameFramework.Fsm;
 using UnityGameFramework.Runtime;
 
-namespace ZFight.Show.Move
+namespace Game.Show.Move
 {
     /// <summary>
     /// 闲置状态

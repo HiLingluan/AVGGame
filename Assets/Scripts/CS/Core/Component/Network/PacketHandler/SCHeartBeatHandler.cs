@@ -8,7 +8,7 @@
 using GameFramework.Network;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public class SCHeartBeatHandler : PacketHandlerBase
     {

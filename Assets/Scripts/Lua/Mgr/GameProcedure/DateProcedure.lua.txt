@@ -1,0 +1,162 @@
+-- des:{约会流程,包含一个子流程概念}
+-- author:lideling
+-- date: 2022-4-26 00:00:00
+--
+local ProcedureBase = require "Mgr.GameProcedure.ProcedureBase"
+local DateProcedure = class("DateProcedure",ProcedureBase)
+require("Mgr.GameProcedure.SubProcedureMgr")
+require("Logic.Loading.LoadingToDate")
+--
+DateProcedure.subproceduremgr = nil;
+--内部的子流程
+--开幕
+local OpenScreenGamePlay = require("Logic.Date.SubProcedure.GamePlay.OpenScreenGamePlay")
+--约会中
+local DatingProcedure = require("Logic.Date.SubProcedure.DatingProcedure")
+--独立玩法
+local DatePlayingProcedure = require("Logic.Date.SubProcedure.DatePlayingProcedure")
+--约会结束
+local DateEndProcedure = require("Logic.Date.SubProcedure.DateEndProcedure")
+
+local BeatGamePlay = require("Logic.Date.SubProcedure.GamePlay.BeatGamePlay")
+local JointTextureGamePlay = require("Logic.Date.SubProcedure.GamePlay.JointTextureGamePlay")
+-- local OpenScreenGamePlay = require("Logic.Date.SubProcedure.GamePlay.OpenScreenGamePlay")
+local PackGamePlay = require("Logic.Date.SubProcedure.GamePlay.PackGamePlay")
+local ScratchGamePlay = require("Logic.Date.SubProcedure.GamePlay.ScratchGamePlay")
+local SearchGamePlay = require("Logic.Date.SubProcedure.GamePlay.SearchGamePlay")
+local TouchGamePlay = require("Logic.Date.SubProcedure.GamePlay.TouchGamePlay")
+
+--//------------------------------------------------------
+local DateTransitionSystem = require "Logic.Date.DateTransitionSystem"
+
+function DateProcedure:ctor()
+    DateProcedure.base(self).ctor(self, Define.EGameProcedure.Date)
+    self.subproceduremgr = SubProcedureMgr();
+    self.subproceduremgr:addProcedure(OpenScreenGamePlay());
+    self.subproceduremgr:addProcedure(DatingProcedure());
+    self.subproceduremgr:addProcedure(DatePlayingProcedure());
+    self.subproceduremgr:addProcedure(DateEndProcedure());
+    self.subproceduremgr:addProcedure(BeatGamePlay());
+    self.subproceduremgr:addProcedure(JointTextureGamePlay());
+    self.subproceduremgr:addProcedure(OpenScreenGamePlay());
+    self.subproceduremgr:addProcedure(ScratchGamePlay());
+    self.subproceduremgr:addProcedure(SearchGamePlay());
+    self.subproceduremgr:addProcedure(TouchGamePlay());
+end
+
+function DateProcedure:onInit()
+    self.super.onInit(self)
+    --场景切换事件响应可
+    self.sceneLoadSuccess = function (sender,e)
+        if e.UserData == "Date" then
+            self:onSceneLoad()
+        end
+    end
+end
+
+function DateProcedure:onEnter()
+    self.super.onEnter(self)
+    --转场初始化
+    DateTransitionSystem:init()
+
+    ServiceMgr:GetService(EServiceType.DateService):onEnter();
+
+    --
+    SoundMgr:StopAll()
+    self.fsm:setData("LastProcedure","DateProcedure")
+    --先进阅读的配置,里面会打开VLoading
+    --等把约会的配置弄好了,再重新写个
+    LoadingToDate.startLoading(function ()
+        GameEntry.OutAsset:Clear()
+    end)
+    --订阅切换场景事件
+    GameEntry.Event:Subscribe(LoadSceneSuccessEventArgs.EventId, self.sceneLoadSuccess)
+    local loadedSceneAssetNames = GameEntry.Scene:GetLoadedSceneAssetNames()
+    for i=0,loadedSceneAssetNames.Length - 1 do
+        GameEntry.Scene:UnloadScene(loadedSceneAssetNames[i])
+    end
+    --
+    GameEntry.Sound:StopAllLoadingSounds()
+    GameEntry.Sound:StopAllLoadedSounds()
+
+    GameEntry.Scene:LoadScene(AssetUtility.GetSceneAsset("Read"), Constant.AssetPriority.SceneAsset, "Read")
+    --状态保存
+    StatUtil.setCurScene(StatConstant.SCENE.Read)
+    StatUtil.setCurPage("Panel_Date")
+end
+
+function DateProcedure:onUpdate()
+    self.super.onUpdate(self)
+
+end
+
+function DateProcedure:onLeave()
+    self.super.onLeave(self)
+    --释放转场
+    DateTransitionSystem:destroy()
+    --设置状态
+    StatUtil.setDateSetID("")
+    --关闭UI
+    ViewMgr:DestroyWindow(EWindowType.DatePanel);
+    -- ViewMgr:DestroyWindow(EWindowType.DateEntry);
+    ViewMgr:DestroyWindow(EWindowType.SelectMatePanel);
+    -- ViewMgr:CloseWindow(EWindowType.DatePanel);
+    -- ViewMgr:CloseWindow(EWindowType.SelectMatePanel);
+    --去掉事件
+    GameEntry.Event:Unsubscribe(LoadSceneSuccessEventArgs.EventId,self.sceneLoadSuccess);
+
+    DateStoryDataMgr:Ins():resetDefalut();
+
+    local hallModelSer = ServiceMgr:GetService(EServiceType.HallModel)
+    hallModelSer:onLeave()
+
+    ServiceMgr:GetService(EServiceType.DateService):onLeave();
+
+    self.subproceduremgr:shutDown();
+    ViewMgr:DestroyWindow(EWindowType.ReadFinal)
+end
+
+function DateProcedure:onDestroy()
+    self.super.onDestroy(self)
+
+end
+
+--//-----------------------------------------------
+function DateProcedure:onSceneLoad(sceneName)
+    -- ViewMgr:OpenWindow(EWindowType.ReadPanel)
+    SoundMgr:StopBgm()
+    Util.CSDispatcher(CSEventKey.ENTER_READ_SCENE)--纯Lua的话,不太需要这块
+    GameEntry.ObjectPool:ReleaseAllUnused();
+end
+
+--阅读预加载
+function DateProcedure:preLoad(func)
+    print("====================================================");
+    --数据全部拿到,Loading已经完成了
+    ViewMgr:CloseWindow(EWindowType.Catalogue)
+    ViewMgr:DestroyFullPanel()
+    local index = 0
+    local onFinish = function ()
+        index = index + 1
+        
+        if index >= 2 then
+            func()
+            ---先开幕,建议走状态切换
+            self.subproceduremgr:startProcedure(Define.EDateProcedure.Dating);
+            --local datePanel = ViewMgr:GetWindow(EWindowType.DatePanel)
+            --datePanel:opening()
+        end
+    end
+    ViewMgr:OpenWindow(EWindowType.DatePanel,function (window)
+        --window:preloadFirstRes()
+        onFinish()
+    end)
+    --转场效果
+    DateTransitionSystem:createTransition(onFinish)
+end
+
+function DateProcedure:changeSubprocedure(edateprocedure)
+    self.subproceduremgr:changeProcedure(edateprocedure)
+end
+
+return DateProcedure

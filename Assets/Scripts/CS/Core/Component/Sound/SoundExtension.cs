@@ -10,7 +10,7 @@ using GameFramework.DataTable;
 using GameFramework.Sound;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public static class SoundExtension
     {

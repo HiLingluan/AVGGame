@@ -1,0 +1,47 @@
+-- des:{游戏流程基类}
+-- author:{zpf}
+-- date: 2021-12-16 09:33:00
+--
+local BaseState = require "Mgr.FSM.BaseState"
+local ProcedureBase = class("ProcedureBase",BaseState)
+
+function ProcedureBase:ctor(type)
+    ProcedureBase.base(self).ctor(self, type)
+    self:initProperty()
+    -- local o = {...}
+    -- for i,sys in ipairs(o) do
+    --     table.insert(self.system,sys)
+    -- end
+end
+
+function ProcedureBase:initProperty()
+    self.system = {}                --每个流程的系统
+end
+
+function ProcedureBase:onInit()
+    -- for i,sys in ipairs(self.system) do
+        
+    -- end
+end
+
+function ProcedureBase:changeSubprocedure()
+
+end
+
+function ProcedureBase:onEnter()
+    
+end
+
+function ProcedureBase:onUpdate()
+    
+end
+
+function ProcedureBase:onLeave()
+    
+end
+
+function ProcedureBase:onDestroy()
+    
+end
+
+return ProcedureBase

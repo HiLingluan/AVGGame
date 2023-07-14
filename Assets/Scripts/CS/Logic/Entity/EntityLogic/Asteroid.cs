@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 小行星类。

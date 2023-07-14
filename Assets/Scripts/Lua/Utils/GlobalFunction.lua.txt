@@ -1,0 +1,633 @@
+local function print_table_(lua_table, indent, strs)
+    for k, v in pairs(lua_table) do
+        if v == lua_table then
+            table.insert(strs, "------------------ break circle reference. " .. k .. "\n")
+        else
+            local typeK = type(k)
+            if typeK == "string" then
+                k = string.format("%q", k)
+            elseif typeK == "function" then
+                k = tostring(k)
+            end
+            local szSuffix = ""
+            local isTable = type(v) == "table" --and k ~= "__index" -- __index should not considered as table. Otherwise the stack will overflow
+            if isTable then
+                szSuffix = "{"
+            end
+            local szPrefix = string.rep("    ", indent)
+            local formatting = szPrefix .. "[" .. k .. "]" .. " = " .. szSuffix
+            if isTable then
+                table.insert(strs, formatting .. "\n")
+                print_table_(v, indent + 1, strs)
+                table.insert(strs, szPrefix .. "},\n")
+            else
+                local szValue = ""
+                if type(v) == "string" then
+                    szValue = string.format("%q", v)
+                else
+                    szValue = tostring(v)
+                end
+                table.insert(strs, formatting .. szValue .. ",\n")
+            end
+        end
+    end
+
+    if #strs > 1000 then
+        print(table.concat(strs))
+
+        for k in pairs(strs) do
+            strs[k] = nil
+        end
+    end
+end
+
+--浅拷贝 只会拷贝值
+function clone_table(org)
+    local function copy(org, res)
+        for k, v in pairs(org) do
+            if type(v) ~= "table" then
+                res[k] = v
+            else
+                res[k] = {}
+                copy(v, res[k])
+            end
+        end
+    end
+
+    local res = {}
+    copy(org, res)
+    return res
+end
+
+--浅拷贝 只会拷贝值
+function CloneTable(org)
+    local function copy(org, res)
+        for k, v in pairs(org) do
+            if type(v) ~= "table" then
+                res[k] = v
+            else
+                res[k] = {}
+                copy(v, res[k])
+            end
+        end
+    end
+
+    local res = {}
+    copy(org, res)
+    return res
+end
+
+--深拷贝 方法也会拷贝
+function DeepCopyTable(object)
+    local lookup_table = {}
+    local function _copy(object)
+        if type(object) ~= "table" then
+            return object
+        elseif lookup_table[object] then
+            return lookup_table[object]
+        end
+        local new_table = {}
+        lookup_table[object] = new_table
+        for index, value in pairs(object) do
+            new_table[_copy(index)] = _copy(value)
+        end
+        return setmetatable(new_table, getmetatable(object))
+    end
+
+    return _copy(object)
+end
+
+function print_table(lua_table, name, indent)
+    if not RELEASE or OpenLOG then
+        indent = indent or 0
+        name = name or ""
+        local strs = {}
+        print_table_(lua_table, indent, strs)
+        Log(name .. "\n" .. table.concat(strs) .. "\n" .. debug.traceback())
+    end
+end
+
+function print_array(array)
+    local strs = {}
+    table.insert(strs, "{")
+    for _, value in ipairs(array) do
+        table.insert(strs, value)
+        table.insert(strs, ", ")
+    end
+    table.insert(strs, "}")
+    print(table.concat(strs))
+end
+
+function printStack()
+    if not RELEASE or OpenLOG then
+        print(debug.traceback())
+    end
+end
+
+io.readfile = function(path)
+    local file = io.open(path, "r")
+    if file then
+        local content = file:read("*a")
+        io.close(file)
+        return content
+    end
+    return nil
+end
+
+io.loadPath = function(path, callBack)
+    local fileData = io.readfile(path)
+    if (fileData and callBack) then
+        callBack(fileData)
+        fileData = nil
+        collectgarbage("collect")
+    end
+end
+
+string.split = function(String, p)
+    local rt = {}
+    string.gsub(
+            String,
+            "[^" .. p .. "]+",
+            function(w)
+                table.insert(rt, w)
+            end
+    )
+    return rt
+end
+
+string.starts = function(String, Start)
+    return string.sub(String, 1, string.len(Start)) == Start
+end
+
+string.ends = function(String, End)
+    return End == "" or string.sub(String, -string.len(End)) == End
+end
+
+table.reverse = function(t)
+    local t2 = {}
+    local count = #t
+    for i = 1, count do
+        t2[count - i + 1] = t[i]
+    end
+
+    return t2
+end
+
+--list table
+table.indexOf = function(list, value)
+    for i = 1, #list do
+        if list[i] == value then
+            return i
+        end
+    end
+    return -1
+end
+
+table.getRange = function(list, index, count)
+    local removeData = {}
+    for i = 0, count - 1 do
+        if list[index + i] then
+            table.insert(removeData, list[index + i])
+        end
+    end
+    return removeData
+end
+
+table.removeAll = function(list)
+    while #list > 0 do
+        table.remove(list, 1)
+    end
+end
+
+table.removeRange = function(list, index, count)
+    local removeData = {}
+    for i = 1, count do
+        if list[index] then
+            table.insert(removeData, list[index])
+            table.remove(list, index)
+        end
+    end
+    return removeData
+end
+
+table.removeItem = function(list, value)
+    local index = table.indexOf(list, value)
+    if index ~= -1 then
+        return table.remove(list, index)
+    end
+end
+
+table.popBack = function(list)
+    return table.remove(list, #list)
+end
+
+table.addFront = function(list, value)
+    return table.insert(list, 1, value)
+end
+
+--清除table操作 避免使用tab = {} 来重置清理table
+table.clear = function(tab)
+    if tab then
+        for k, v in pairs(tab) do
+            tab[k] = nil
+        end
+    end
+end
+
+--去空白
+function string.ltrim(input)
+    local str, n = string.gsub(input, "^[ \t\n\r]+", "")
+    return str
+end
+
+function string.rtrim(input)
+    local str, n = string.gsub(input, "[ \t\n\r]+$", "")
+    return str
+end
+
+function string.trim(input)
+    input = string.gsub(input, "^[ \t\n\r]+", "")
+    local str, n = string.gsub(input, "[ \t\n\r]+$", "")
+    return str
+end
+
+
+--是否包含某个key值
+function table.containKey(array, key)
+    local has = false
+    for i, v in pairs(array) do
+        if i == key then
+            has = true
+            break
+        end
+    end
+
+    return has
+end
+
+function table.containValue(array, value)
+    local has = false
+    for i, v in pairs(array) do
+        if v == value then
+            has = true
+            break
+        end
+    end
+
+    return has
+end
+
+function table.isempty(tab)
+    return not tab or _G.next(tab) == nil
+end
+
+function table.addRange(targetArray, sourceArray)
+    for i, v in pairs(sourceArray or {}) do
+        table.insert(targetArray, v)
+    end
+end
+
+---浅拷贝 --只有第一层变量 是独立的
+function table.Copy(tab)
+    local temp = {}
+    for k, v in pairs(tab) do
+        temp[k] = v
+    end
+    return temp
+end
+
+function countTable(tab)
+    local num = 0;
+    if tab then
+        for k, v in pairs(tab) do
+            num = num + 1
+        end
+    end
+    return num;
+end
+
+--TODO:慎用,大部分循环用lua自带的两种方式即可,没必要去做下列操作  by:zpf
+-- 非list的状态,让它按顺序执行  
+function pairsByKeys(t)
+    local a = {}
+
+    for n in pairs(t) do
+        a[#a + 1] = n
+    end
+
+    table.sort(a)
+
+    local i = 0
+
+    return function()
+        i = i + 1
+        return a[i], t[a[i]]
+    end
+end
+
+--把一个非List的tab,按Key的数字顺序弄成一个tab
+function tabletolist(tab)
+    local list = {};
+    if tab then
+        for k, v in pairsByKeys(tab) do
+            table.insert(list, v);
+        end
+    end
+    return list;
+end
+
+--因为后端返回的key都是string,如果可以确定key都是number,可以执行这个
+function tablekeytonumber(tab)
+    if tab then
+        for k, v in pairs(tab) do
+            tab[tonumber(k)] = v;
+        end
+    end
+    return tab;
+end
+
+-- function pairsByKeys (t, f)
+--     local a = {}
+--     for n in pairs(t) do table.insert(a, n) end
+--     table.sort(a, f)
+--     local i = 0      -- iterator variable
+--     local iter = function ()   -- iterator function
+--       i = i + 1
+--       if a[i] == nil then return nil
+--       else return a[i], t[a[i]]
+--       end
+--     end
+--     return iter
+--   end
+
+-- 用于LoopListView2的多列状态,比如3列4列,从一个List的状态拆成几个一行
+-- 返回一个新的tab
+-- listTab原list,rownum一行几个
+function tableToRow(listTab, rownum)
+    if listTab == nil then
+        return nil;
+    end
+    rownum = tonumber(rownum);
+    if rownum <= 1 then
+        return listTab;
+    end
+
+    local rowTab = {};
+    local row = {};
+
+    for k, v in pairsByKeys(listTab) do
+        if #row == 0 then
+            table.insert(rowTab, row);
+        end
+        table.insert(row, v);
+        if #row == rownum then
+            row = {};
+        end
+    end
+    return rowTab;
+end
+
+--return luaclsdataTab
+function tableToClass(dataTab, luacls)
+    return setmetatable(dataTab, { __index = luacls });
+end
+
+math.round = function(num)
+    return math.floor(num + 0.5)
+end
+
+--//----------------UnityEngine--------------
+
+function Instantiate(obj, parent)
+    if parent then
+        return CSUtil.UtilInstantiate(obj, parent)
+    else
+        return GameObject.Instantiate(obj)
+    end
+end
+
+function DestroyImmediate(obj)
+    GameObject.DestroyImmediate(obj, true)
+end
+
+function DestroyObj(obj)
+    CSUtil.DestroyGameObject(obj)
+end
+
+--//-----------------Log----------------------
+
+--项目自定义log(需要在LoggerHelper中定义自己的名字以及函数，然后在此作封装)
+local logHelper = CS.UnityGameFramework.Runtime.Log
+
+function FLog(obj)
+    logHelper.Info(tostring(obj) .. "\n" .. debug.traceback())
+end
+
+function ZLog(obj)
+    logHelper.Info(tostring(obj) .. "\n" .. debug.traceback())
+end
+
+-- function ErrorLog(obj)
+--     logHelper.CommLogError(tostring(obj) .. "\n" .. debug.traceback())
+-- end
+
+function Log(str)
+    logHelper.Info(tostring(str) .. "\n" .. debug.traceback())
+end
+
+function LogWarn(str)
+    logHelper.Warning(tostring(str) .. "\n" .. debug.traceback())
+end
+
+function LogError(str)
+    logHelper.Error(tostring(str) .. "\n" .. debug.traceback())
+end
+
+print = function(str)
+    logHelper.Info(str)
+end
+
+--//---------------------------------------g_CountTable---------------------------------------
+--计数table
+g_CountTable = { _list = {}, _count = 0 }
+
+--创建
+g_CountTable.new = function()
+    local o = {}
+    setmetatable(o, g_CountTable)
+    g_CountTable.__index = g_CountTable
+    o._list = {}
+    o._count = 0
+    return o
+end
+
+--添加
+function g_CountTable:add(id, value)
+    if self._list[id] == nil then
+        self._count = self._count + 1
+    end
+    if self._list[id] then
+        LogWarn("重复的方法Key,请确认使用不同的名称=========" .. tostring(id))
+    end
+
+    self._list[id] = value
+end
+
+--删除
+function g_CountTable:del(id)
+    if self._list[id] ~= nil then
+        self._list[id] = nil
+        self._count = self._count - 1
+    end
+end
+
+--清理
+function g_CountTable:clear()
+    self._list = {}
+    self._count = 0
+end
+
+--数量
+function g_CountTable:count()
+    return self._count
+end
+
+--是否存在
+function g_CountTable:get(id)
+    return self._list[id]
+end
+
+--遍历
+function g_CountTable:foreach(func)
+    table.foreach(self._list, func)
+end
+
+-------------------------------------g_FrameTimeChecker---------------------------------------
+--帧累计时间检测,用于处理每隔多久处理一次的逻辑
+g_FrameTimeChecker = { _total = 0, _interval = 0 }
+g_FrameTimeChecker.new = function(interval, randStart)
+    local o = {}
+    setmetatable(o, g_FrameTimeChecker)
+    g_FrameTimeChecker.__index = g_FrameTimeChecker
+    o:reset(interval, randStart)
+    return o
+end
+
+function g_FrameTimeChecker:check(frameTime)
+    self._total = self._total + frameTime
+    if self._total > self._interval then
+        self._total = 0
+        return true
+    end
+
+    return false
+end
+
+function g_FrameTimeChecker:reset(interval, randStart)
+    self._interval = interval
+    if randStart then
+        self._total = Random.Range(0.01, self._interval / 2)
+    else
+        self._total = 0
+    end
+end
+
+-----------------------------------------------------------
+-- local LuaClickListener = CS.LuaClickListener;
+local UIClickBase = CS.JMatrix.UIClickBase;
+--不用考虑析构...CS端在GameObjectDispose的时候会去掉引用
+function AddClickEvent(target, call_back)
+    if target then
+        --CS.UIClickBase:Get(target).onClick = call_back
+        CS.LuaClickListener.Get(target.gameObject).onClick = call_back
+        --UIClickBase.Get(target.gameObject).onClick = call_back
+    end
+end
+
+--一般用MouseClickBase那个来实现,直接用Input.GetMouseButtonUp实现,所以这个没太多存在的必要
+-- function AddMouseUpEvent(target, call_back)
+--     if target then
+--         --CS.UIClickBase:Get(target).onClick = call_back
+--         UIClickBase.Get(target.gameObject).onClickDown = call_back
+--     end
+-- end
+
+--按钮基础点击音效
+local baseUIClickSoundFunc = function()
+    Util.playAudio(MusicConfig.Click)
+end
+
+--默认点击间隔事件
+local clickIntervalFunc = function()
+    Util.CSDispatcher(CSEventKey.EVT_UICLICK_INTERVAL)
+end
+
+--设置按钮点击事件
+function SetOnClick(target, func, soundKey)
+    if not target then
+        LogWarn("空目标!")
+        return
+    end
+    local listener = CS.LuaClickListener.Get(target)
+    listener:SetListener(func)
+    if soundKey ~= nil and soundKey ~= "" then
+        listener:AddListener(function()
+            Util.playAudio(soundKey)
+        end)
+    else
+        listener:AddListener(baseUIClickSoundFunc)
+    end
+    listener:AddListener(clickIntervalFunc)
+end
+
+--增加按钮点击事件
+function AddOnClickEvent(target, func)
+    if not target then
+        return
+    end
+    local listener = CS.LuaClickListener.Get(target)
+    listener:AddListener(func)
+end
+
+--移除事件
+function RemoveClickEvent(target, func)
+    if not target then
+        return
+    end
+    local listener = CS.LuaClickListener.Get(target)
+    listener:RemoveListener(func)
+end
+
+--移除所有点击事件
+function RemoveAllClickEvent(target)
+    if not target then
+        return
+    end
+    CS.LuaClickListener.Get(target.gameObject):RemoveAllListeners()
+end
+
+function AddMouseDownEvent(target, call_back)
+    if target then
+        --CS.UIClickBase:Get(target).onClick = call_back
+        UIClickBase.Get(target.gameObject).onClickDown = call_back
+    end
+end
+
+--转bool
+function toBool(flag)
+    return flag and true or false
+end
+
+function destroyTab(tab, isDelete)
+    isDelete = toBool(isDelete);
+    if tab then
+        for k, v in pairs(tab) do
+            if v["destroy"] then
+                v:destroy();
+            end
+            if isDelete then
+                tab[k] = nil;
+            end
+        end
+    end
+end

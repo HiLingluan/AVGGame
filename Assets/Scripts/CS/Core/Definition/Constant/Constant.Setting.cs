@@ -5,7 +5,7 @@
 // Feedback: mailto:ellan@gameframework.cn
 //------------------------------------------------------------
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 游戏常量

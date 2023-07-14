@@ -9,7 +9,7 @@ using GameFramework.DataTable;
 using System;
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     [Serializable]
     public class ArmorData : AccessoryObjectData

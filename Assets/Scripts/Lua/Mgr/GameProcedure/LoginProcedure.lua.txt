@@ -1,0 +1,74 @@
+-- des:{登录启动流程}
+-- author:{zpf}
+-- date: 2022-05-07 14:58:00
+--
+local ProcedureBase = require "Mgr.GameProcedure.ProcedureBase"
+local LoginProcedure = class("LoginProcedure",ProcedureBase)
+
+function LoginProcedure:ctor()
+    LoginProcedure.base(self).ctor(self, Define.EGameProcedure.Login)
+end
+
+function LoginProcedure:onInit()
+    self.super.onInit(self)
+    self:creatCommonMsgTip()
+end
+
+function LoginProcedure:onEnter()
+    require ("Utils.BeginContainer")--因为要做第三方登录,所以把这个提前 --require("Logic.Stat.CMSStat")--提前引用
+    Util.changeLanguage(CSUtil.GetCurLanguageCode())
+
+    CMSStat.appStart();
+    
+    --新手视频检测?
+    self.fsm:setData("LastProcedure","LoginProcedure")
+    local localInt = CSUtil.GetInt("NewPlayerVideoFinish")
+    if localInt == 1 then
+        ViewMgr:OpenWindow(EWindowType.Login,function (w)
+            Util.CSDispatcher(CSEventKey.EVT_HIDE_POLICYBG)
+            EventMgr.Dispatcher(LuaEventKey.ON_GUIDEVIDEO_END)
+            EventMgr.Dispatcher(LuaEventKey.ON_LOGIN_ACTIVE,{active = true})
+            CMSStat.customEvent(StatEventName.PV_PLAY_EVENT , "guide play video finish");
+        end)
+    else
+        local playVideo = function()
+            ViewMgr:OpenWindow(EWindowType.Login,function (w)
+                local window = ViewMgr:GetWindow(EWindowType.NewPlayerVideo)
+                if window then
+                    window:play()
+                    CMSStat.customEvent(StatEventName.PV_PLAY_EVENT , "start play video");
+                end
+            end)
+        end
+        Util.AddCSEvent(CSEventKey.EVT_FINISH_POLICYBG, playVideo)
+        ViewMgr:OpenWindow(EWindowType.NewPlayerVideo,function()
+            Util.CSDispatcher(CSEventKey.EVT_HIDE_POLICYBG)
+            CMSStat.customEvent(StatEventName.PV_PLAY_EVENT , "open new player video");
+        end)
+    end
+end
+
+function LoginProcedure:onUpdate()
+
+end
+
+function LoginProcedure:onLeave()
+    
+end
+
+function LoginProcedure:onDestroy()
+    
+end
+
+function LoginProcedure:creatCommonMsgTip()
+    CommonTools.GetPrefab("CommonMsgTip",function (obj)
+        obj.transform:SetParent(GameEntry.Global.uiRoot.transform)
+        obj.transform.localScale = Vector3.one
+        obj.transform.anchorMax = Vector2.one
+        obj.transform.anchorMin = Vector2.zero
+        obj.transform.offsetMax = Vector2.zero
+        obj.transform.offsetMin  = Vector2.zero
+    end)
+end
+
+return LoginProcedure

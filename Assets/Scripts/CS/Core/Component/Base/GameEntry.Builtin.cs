@@ -8,7 +8,7 @@
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 游戏入口。

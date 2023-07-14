@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     public static partial class Constant
     {

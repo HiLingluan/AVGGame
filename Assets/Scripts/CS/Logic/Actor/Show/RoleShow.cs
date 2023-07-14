@@ -1,8 +1,8 @@
 ﻿using GameFramework.Fsm;
 using UnityGameFramework.Runtime;
-using ZFight.Show.Move;
+using Game.Show.Move;
 
-namespace ZFight.Show
+namespace Game.Show
 {
     /// <summary>
     /// 角色表现层

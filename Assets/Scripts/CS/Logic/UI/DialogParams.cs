@@ -7,7 +7,7 @@
 
 using GameFramework;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 对话框显示数据。

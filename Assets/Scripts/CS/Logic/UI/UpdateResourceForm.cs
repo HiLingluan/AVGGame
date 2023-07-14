@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace ZFight
+namespace Game
 {
     public class UpdateResourceForm : MonoBehaviour
     {

@@ -3,7 +3,7 @@ using GameFramework.DataTable;
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public class NomalGame : GameBase
     {

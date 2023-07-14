@@ -1,0 +1,50 @@
+-- des:{资源管理器}
+-- author:{zpf}
+-- date: 2021-05-08 09:45:51
+ResMgr = class("ResMgr")
+local AtlasConfig = require "Config.AtlasConfig"
+
+function ResMgr:ctor()
+    self:initProperty()
+end
+
+function ResMgr:initProperty()
+   self.atlasList = {}
+end
+
+function ResMgr:loadAtlas(atlasType,func)
+    if not self.atlasList[atlasType] then
+        self.atlasList[atlasType] = {}
+        local path = AtlasConfig[atlasType].path
+        CommonTools.GetSpriteCollection(path,function (spriteCollection)
+            self.atlasList[atlasType]= spriteCollection
+            if func then
+                func()
+            end
+        end)
+        
+    else
+        if func then
+            func()
+        end
+    end
+end
+
+function ResMgr:loadSprite(atlasType,spriteName)
+    if not spriteName then
+        LogWarn("spriteName 为空")
+        return nil
+    end
+    local collection = self.atlasList[atlasType]
+    if not collection then LogWarn("图集未加载"..tostring(atlasType))return nil end
+    return collection:GetSprite(spriteName)
+end
+
+function ResMgr:unLoadAtlas(atlasType)
+    if self.atlasList[atlasType] then
+        --TODO:释放图集收集器资源
+        self.atlasList[atlasType] = nil
+    end
+end
+
+ResMgr:ctor()

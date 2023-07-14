@@ -10,7 +10,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public class DialogForm : UGuiForm
     {

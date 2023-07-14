@@ -10,7 +10,7 @@ using GameFramework.Event;
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 切换场景流程
@@ -119,7 +119,7 @@ namespace ZFight
             if (m_BackgroundMusicId > 0)
             {
                 //播放背景音乐
-                TestConfig.musicID = GameEntry.Sound.PlayMusic(m_BackgroundMusicId);
+                //TestConfig.musicID = GameEntry.Sound.PlayMusic(m_BackgroundMusicId);
             }
 
             m_IsChangeSceneComplete = true;

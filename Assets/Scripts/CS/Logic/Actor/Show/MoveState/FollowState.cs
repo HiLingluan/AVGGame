@@ -2,7 +2,7 @@
 using UnityGameFramework.Runtime;
 using UnityEngine;
 
-namespace ZFight.Show.Move
+namespace Game.Show.Move
 {
     /// <summary>
     /// 跟随状态

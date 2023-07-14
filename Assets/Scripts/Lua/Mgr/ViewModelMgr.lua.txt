@@ -1,0 +1,35 @@
+-- des:{ViewModel容器}
+-- author:{zpf}
+-- date: 2021-04-26 10:58:51
+ViewModelMgr = class("ViewModelMgr")
+
+function ViewModelMgr:ctor()
+    self:initProperty()
+end
+
+function  ViewModelMgr:initProperty()
+   self.viewModelList = {}  
+end
+
+function  ViewModelMgr:register(key,viewModel)
+    if not self.viewModelList[key] then
+        self.viewModelList[key] = viewModel
+    end
+end
+
+function  ViewModelMgr:remove(key)
+    if self.viewModelList[key] then
+        self.viewModelList[key] = nil
+    end
+end
+
+--根据key获取viewModel
+function ViewModelMgr:GetViewModel(key)
+    if self.viewModelList[key] then
+        return self.viewModelList[key]
+    end
+    LogWarn("找不到ViewModel==="..tostring(key))
+    return nil
+end
+
+ViewModelMgr:ctor()

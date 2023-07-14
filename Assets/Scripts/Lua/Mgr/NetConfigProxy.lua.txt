@@ -1,0 +1,67 @@
+-- des:{网络数据的临时缓存}
+-- author:{ddz}
+-- date: 2021-06-07 14:50:00
+--
+NetConfigProxy = {}
+
+--语言表
+function NetConfigProxy.onLoadLanguage(json)
+
+end
+
+--摄像机特效
+function NetConfigProxy.onLoadCameraEffect(json)
+
+end
+
+--立绘
+function NetConfigProxy.onLoadRoleMgr(json)
+    CSStoryData:LoadRoleConfig(json)
+end
+
+--摄像机运镜
+function NetConfigProxy.onLoadLensRoad(json)
+    CSStoryData:LoadLensRoadConfig(json)
+end
+
+--人物时装
+function NetConfigProxy.onLoadFashion(json)
+    CSStoryData:LoadFashionConfig(json)
+end
+
+--段落
+function NetConfigProxy.onLoadParagraph(json)
+    CSStoryData:LoadParagraph(json)
+end
+
+--对话
+function NetConfigProxy.onLoadDialogue(json)
+    CSStoryData:LoadDialog(json)
+end
+
+--选项
+function NetConfigProxy.onLoadChoice(json)
+    CSStoryData:LoadChoiceConfig(json)
+end
+--探索bg
+function NetConfigProxy.onLoadGameBg(json)
+    CSStoryData:LoadGameBGConfig(json)
+end
+--cg
+function NetConfigProxy.onLoadGameCg(json)
+    CSStoryData:LoadGameCG(json)
+end
+
+--短信
+function NetConfigProxy.onLoadGameChat(json)
+    local readService = ServiceMgr:GetService(EServiceType.Read)
+    readService:loadMsgConfig(json)
+end
+
+--水排序配置
+function NetConfigProxy.onLoadWaterSort(json)
+    -- local waterService = ServiceMgr:GetCSService("WaterSortService")
+    -- waterService:LoadJson(json)
+    -- local waterConfig = waterService:GetWaterConfig()
+    -- return waterConfig
+end

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 预加载资源流程

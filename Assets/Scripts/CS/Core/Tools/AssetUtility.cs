@@ -1,6 +1,6 @@
 ﻿using GameFramework;
 
-namespace ZFight
+namespace Game
 {
     public static class AssetUtility
     {

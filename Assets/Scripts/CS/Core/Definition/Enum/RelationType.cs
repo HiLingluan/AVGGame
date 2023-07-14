@@ -1,5 +1,5 @@
 ﻿
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 关系类型。

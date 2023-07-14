@@ -9,7 +9,7 @@ using GameFramework;
 using UnityEditor;
 using UnityEngine;
 
-namespace ZFight.Editor.DataTableTools
+namespace Game.Editor.DataTableTools
 {
     public sealed class DataTableGeneratorMenu
     {

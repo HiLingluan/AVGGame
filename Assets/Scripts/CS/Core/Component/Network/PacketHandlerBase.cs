@@ -7,7 +7,7 @@
 
 using GameFramework.Network;
 
-namespace ZFight
+namespace Game
 {
     public abstract class PacketHandlerBase : IPacketHandler
     {

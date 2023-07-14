@@ -1,0 +1,115 @@
+--[[
+    des:效果类
+    author:{王连豪}
+    time:2021-10-28 17:08:14
+]]
+
+UIAnimationTool = {}
+
+--Move
+function UIAnimationTool:DoMove(transform,startPos,endPos,time,ease,onComplete)
+    local doMove = transform:DOMove(endPos,time)
+    -- doMove:ChangeStartValue(startPos)
+    doMove:SetEase(ease)
+    if onComplete then
+        doMove.onComplete = onComplete
+    end
+    return doMove
+end
+
+--过度补间
+function UIAnimationTool:To(callback,curValue,targetValue,time,ease,onComplete)
+    --TODO:需要在C#重新封装 频繁使用会有GC
+    local tween = DOTween.To(function(value)
+        if callback then
+            callback(value)
+        end
+    end,curValue,targetValue,time)
+    tween:SetEase(ease)
+    if onComplete then
+        tween.onComplete = onComplete
+    end
+    return tween
+end
+
+--Scale
+function UIAnimationTool:DoScale(transform,curValue,targetValue,time,ease,onComplete)
+    local startValue = Vector3(targetValue,targetValue,0)
+    local endValue = Vector3(targetValue,targetValue,0)
+    local doScale = transform:DOScale(endValue,time)
+    -- doScale:ChangeStartValue(startValue)
+    doScale:SetEase(ease)
+    if onComplete then
+        doScale.onComplete = onComplete
+    end
+    return doScale
+end
+
+--LocalMove
+function UIAnimationTool:DoLocalMove(transform,endPos,time,ease,callback)
+
+    ZLog("DoLocalMove>>>>>>>>>>>>>>>>>>Name: "..tostring(transform.name).."||| Pos: "..tostring(endPos))
+
+    local doLocalMove = transform:DOLocalMove(endPos,time)
+    doLocalMove:SetEase(ease)
+    if callback then
+        doLocalMove.onComplete = callback
+    end
+    return doLocalMove
+end
+
+--路径移动
+function UIAnimationTool:DoPath(transform,paths,time,callback)
+    local doPath = transform:DOLocalPath(paths,time,CS.DG.Tweening.PathType.CatmullRom)
+    if callback then 
+        doPath.onComplete = callback
+    end
+    return doPath
+end
+
+--弹窗出现动画 
+function UIAnimationTool:PopWindow(transform,onComplete)
+    local tween = transform:DOScale(Vector3.one,0.2)
+    tween:ChangeStartValue(Vector3(1.5,1.5,1))
+    tween:SetEase(Ease.OutBack)
+    if onComplete then
+        tween.onComplete = onComplete
+    end
+    return tween
+end
+
+--CanvasGroup group
+function UIAnimationTool:DoFadeCanvasGroup(group,isShow)
+    isShow = isShow or false;
+    if not group.gameObject.activeSelf and isShow then
+        group.alpha = 0;
+        group.DOFade(1,0.3);
+    end
+    
+    CSUtil.SetActive(group.gameObject,isShow)
+end
+--DialogType dialogType ,RawImage RawImg , CanvasGroup BgCanvasGroup|DialogName ,RectTransform DialogBg , bool isHasFemail
+function UIAnimationTool.DotDialogBg(dialogType,DialogBg,RawImg,BgCanvasGroup,DialogName,isHasFemail)
+    isHasFemail = isHasFemail or false;
+    RawImg.color = Color.clear;
+    BgCanvasGroup.alpha = 0;
+    DialogBg.sizeDelta = Vector2(DialogBg.sizeDelta.x , 224);
+    local delayTime = DialogName.gameObject.activeSelf and 0.3  or 0;
+    BgCanvasGroup:DOFade(1,0.3):SetEase(CS.DG.Tweening.Ease.InOutQuad):SetDelay(delayTime);
+    local hight = dialogType == Define.DialogType.AmazedDialog and 480 or 414;
+    local RawImgRT = function()
+        if isHasFemail then
+            RawImg:DOColor(Color.white,0.3);
+        end
+    end
+    DialogBg:DOSizeDelta(Vector2(DialogBg.sizeDelta.x , hight),0.15):SetDelay(delayTime):SetEase(CS.DG.Tweening.Ease.InOutQuad):OnComplete(RawImgRT);
+end
+
+function UIAnimationTool:DotName(canvasgroup , isshow)
+    isshow = toBool(isshow);
+    if  not canvasgroup.gameObject.activeSelf and isshow then
+        canvasgroup.alpha = 0;
+        canvasgroup:DOFade(1, 0.3);
+    end
+    CSUtil.SetActive(canvasgroup , isshow)
+end

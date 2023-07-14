@@ -1,0 +1,183 @@
+-- des:{压缩包管理类}
+-- author:{ddz}
+-- date: 2021-06-07 14:50:00
+--
+ZipMgr = {}
+
+-------------基础接口--------------
+local ZipDownloadTools = CS.JMatrix.ZipDownloadTools
+function ZipMgr.DownloadZip(zipUrl, saveFolder, zipMD5, finishCallBack, zipSize, downloadingCallback, retryCount)
+    zipUrl = HttpMgr.curCDN .. zipUrl
+    if not zipSize then
+        zipSize = 0
+    end
+    if not downloadingCallback then
+        downloadingCallback = function(progress)
+        end
+    end
+    if not retryCount then
+        retryCount = -1
+    end
+
+    ZipDownloadTools.DownloadZip(zipUrl, saveFolder, zipMD5, finishCallBack, zipSize, downloadingCallback, retryCount)
+end
+
+function ZipMgr.LoadZipFile(fileUrl, finishCallBack, loadingCallback)
+    if not finishCallBack then
+        finishCallBack = function(s)
+        end
+    end
+    if not loadingCallback then
+        loadingCallback = function(f)
+        end
+    end
+    --加载文件没有处理失败情况
+    ZipDownloadTools.LoadZipFile(fileUrl, finishCallBack, loadingCallback)
+end
+
+function ZipMgr.FileIsDownload(filePath, md5)
+    return ZipDownloadTools.ZipFileIsDownload(filePath, md5)
+end
+
+-------------下载/加载模板代码--------------
+--Loading专用的用Key交互的形式 DL = Download Load
+--LoadingConfig中定义的功能key
+--zip网络包地址
+--zip下载完成后的流目录文件名字
+--zip MD5
+--zip 大小
+--需要加载的文件名字
+--加载完成后的回调
+function ZipMgr.DLWithEvent(key, zipNetPath, saveFolder, md5, size, loadFile, loadFinish)
+    local downLoadingKey = key .. LoadingConfig.eventKey.DOWNLOADING
+    local loadingKey = key .. LoadingConfig.eventKey.LOADING
+    -----------加载
+    local loadFunc = function()
+        local progress1 = function(progressVal)
+            if progressVal < 1 then
+                EventMgr.Dispatcher(loadingKey, key, LoadingConfig.eventKey.LOADING, progressVal)
+
+                --EventMgr.Dispatcher(loadingKey, progressVal)
+            end
+        end
+        if loadFinish and type(loadFinish) == "function" then
+            local finish = function(text)
+                loadFinish(text)
+                -- EventMgr.Dispatcher(loadingKey, 1)
+                EventMgr.Dispatcher(loadingKey, key, LoadingConfig.eventKey.LOADING, 1)
+            end
+            ZipMgr.LoadZipFile(loadFile, finish, progress1)
+        else
+            EventMgr.Dispatcher(loadingKey, key, LoadingConfig.eventKey.LOADING, 1)
+            -- EventMgr.Dispatcher(loadingKey, 1)
+        end
+    end
+    ------------下载
+    do
+        local progress = function(progressVal)
+            EventMgr.Dispatcher(downLoadingKey, key, LoadingConfig.eventKey.DOWNLOADING, 1)
+            -- EventMgr.Dispatcher(downLoadingKey, progressVal)
+        end
+        local finish = function(code)
+            if code == 0 then
+                -- EventMgr.Dispatcher(downLoadingKey, 1)
+                EventMgr.Dispatcher(downLoadingKey, key, LoadingConfig.eventKey.DOWNLOADING, 1)
+
+                loadFunc()
+            else
+                ZLog("文件下载失败:" .. tostring(zipNetPath))
+                CommonTools.ShowCommonMsgBox(
+                        CommonConfig:getLanguage("lag_procedure_040"),
+                        CommonConfig:getLanguage("lag_procedure_045") .. tostring(zipNetPath),
+                        function()
+                            ZipMgr.DLWithEvent(key, zipNetPath, saveFolder, md5, size, loadFile, loadFinish)
+                        end,
+                        CommonConfig:getLanguage("lag_downfail_sure")
+                )
+            end
+        end
+        ZipMgr.DownloadZip(zipNetPath, saveFolder, md5, finish, size, progress)
+    end
+end
+
+--静默下载 DL = Download Load
+function ZipMgr.SilentDL(
+        zipNetPath,
+--zip网络包地址
+        saveFolder,
+--zip下载完成后的流目录文件名字
+        md5, --zip MD5
+        size, --zip 大小
+        loadFile, --需要加载的文件名字
+        loadFinish)
+    --加载完成后的回调
+    -----------加载
+    local loadFunc = function()
+        local progress1 = function(progressVal)
+        end
+        local finish1 = function(text)
+            if loadFinish and type(loadFinish) == "function" then
+                loadFinish(text)
+            end
+        end
+        ZipMgr.LoadZipFile(loadFile, finish1, progress1)
+    end
+    ------------下载
+    do
+        local progress = function(progressVal)
+        end
+        local finish = function()
+            loadFunc()
+        end
+        ZipMgr.DownloadZip(zipNetPath, saveFolder, md5, finish, size, progress)
+    end
+end
+
+--转菊花下载 DL = Download Load
+function ZipMgr.WaitDL(
+        zipNetPath,
+--zip网络包地址
+        saveFolder,
+--zip下载完成后的流目录文件名字
+        md5, --zip MD5
+        size, --zip 大小
+        loadFile, --需要加载的文件名字
+        loadFinish)
+    --加载完成后的回调
+    CS.JMatrix.UICommonTools.LogicOpenWaitUI()
+    -----------加载
+    local loadFunc = function()
+        local progress1 = function(progressVal)
+        end
+        local finish1 = function(text)
+            if loadFinish and type(loadFinish) == "function" then
+                CS.JMatrix.UICommonTools.LogicCloseWaitUI()
+                loadFinish(text)
+            end
+        end
+        ZipMgr.LoadZipFile(loadFile, finish1, progress1)
+    end
+    ------------下载
+    do
+        local progress = function(progressVal)
+        end
+        local finish = function(code)
+            if code == 0 then
+                loadFunc()
+            else
+                CS.JMatrix.UICommonTools.LogicCloseWaitUI()
+                ZLog("文件下载失败:" .. tostring(zipNetPath))
+                CommonTools.ShowCommonMsgBox(
+                        CommonConfig:getLanguage("lag_procedure_040"),
+                        CommonConfig:getLanguage("lag_procedure_045") .. tostring(zipNetPath),
+                        function()
+                            ZipMgr.WaitDL(zipNetPath, saveFolder, md5, size, loadFile, loadFinish)
+                        end,
+                        CommonConfig:getLanguage("lag_downfail_sure")
+                )
+            end
+            loadFunc()
+        end
+        ZipMgr.DownloadZip(zipNetPath, saveFolder, md5, finish, size, progress)
+    end
+end

@@ -8,7 +8,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace ZFight.Editor.DataTableTools
+namespace Game.Editor.DataTableTools
 {
     public sealed partial class DataTableProcessor
     {

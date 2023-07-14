@@ -1,0 +1,56 @@
+-- des:{FSM管理}
+-- author:{zpf}
+-- date: 2021-12-16 09:33:00
+--
+local FSMMachine = require "Mgr.FSM.FSMMachine"
+FSMMgr = class("FSMMgr")
+
+function FSMMgr:ctor()
+    self:initProperty()
+    EventMgr.Add(LuaEventKey.ENTER_FRAME,self.update,self)
+end
+
+function FSMMgr:initProperty()
+    self.fsmList = {}
+end
+
+function FSMMgr:createFsm(name,owner,...)
+    if self.fsmList[name] then
+        Log("已存在FSM===="..name)
+    end
+    local fsm = FSMMachine(name,owner,...)
+    self.fsmList[name] = fsm
+    return fsm
+end
+
+
+function FSMMgr:hasFsm(name)
+    if self.fsmList[name] then
+        return  true
+    end
+    return false
+end
+
+function FSMMgr:getFsm(name)
+    if self.fsmList[name] then
+        return  self.fsmList[name]
+    end
+    return nil
+end
+
+function FSMMgr:destroyFsm(name)
+    if self.fsmList[name] then
+        self.fsmList[name]:dispose()
+        self.fsmList[name] = nil
+    end
+end
+
+function FSMMgr:update(deltaTime,unScaleDeltaTime)
+    for k,fsm in pairs(self.fsmList) do
+        if not fsm.isDestroy then
+            fsm:update(deltaTime,unScaleDeltaTime)
+        end
+    end
+end
+
+FSMMgr:ctor()

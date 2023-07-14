@@ -1,6 +1,6 @@
 ﻿using GameFramework.Fsm;
 using UnityGameFramework.Runtime;
-namespace ZFight.Logic
+namespace Game.Logic
 {
     /// <summary>
     /// 技能逻辑层

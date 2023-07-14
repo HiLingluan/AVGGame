@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using UnityGameFramework.Runtime;
 using ProcedureOwner = GameFramework.Fsm.IFsm<GameFramework.Procedure.IProcedureManager>;
 
-namespace ZFight
+namespace Game
 {
     public class ProcedureMain : ProcedureBase
     {

@@ -1,0 +1,6 @@
+require("Utils.GlobalType")--和对应一些CS的接口,简写
+require("Utils.GlobalFunction")
+require("Utils.Util")
+require("Utils.UIAnimationTool")--缓动相关
+require("Utils.CSharpInterface")
+require("Utils.LoadSpriteTool")

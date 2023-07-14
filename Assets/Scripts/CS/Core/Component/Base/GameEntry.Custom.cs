@@ -7,7 +7,7 @@
 
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     /// <summary>
     /// 游戏入口。
@@ -25,6 +25,8 @@ namespace ZFight
             get;
             private set;
         }
+
+        public static LuaComponent Lua;
 
         private static void InitCustomComponents()
         {

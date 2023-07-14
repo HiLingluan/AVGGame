@@ -8,12 +8,12 @@
 using UnityEngine;
 using UnityGameFramework.Runtime;
 
-namespace ZFight
+namespace Game
 {
     public class MenuForm : UGuiForm
     {
         [SerializeField]
-        private MenuFormBinder binder = null;
+        //private MenuFormBinder binder = null;
 
         private ProcedureMenu m_ProcedureMenu = null;
 
@@ -46,15 +46,15 @@ namespace ZFight
         protected override void OnInit(object userData)
         {
             base.OnInit(userData);
-            binder.setBtn.gameObject.SetActive(false);
-            binder.aboutBtn.gameObject.SetActive(false);
-            binder.quitBtn.gameObject.SetActive(false);
+            //binder.setBtn.gameObject.SetActive(false);
+            //binder.aboutBtn.gameObject.SetActive(false);
+            //binder.quitBtn.gameObject.SetActive(false);
             AddClickListener();
         }
 
         void AddClickListener()
         {
-            binder.startBtn.onClick.AddListener(OnStartButtonClick);
+            //binder.startBtn.onClick.AddListener(OnStartButtonClick);
         }
 
 #if UNITY_2017_3_OR_NEWER

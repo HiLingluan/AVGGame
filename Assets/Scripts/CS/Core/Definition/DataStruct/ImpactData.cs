@@ -7,7 +7,7 @@
 
 using System.Runtime.InteropServices;
 
-namespace ZFight
+namespace Game
 {
     [StructLayout(LayoutKind.Auto)]
     public struct ImpactData

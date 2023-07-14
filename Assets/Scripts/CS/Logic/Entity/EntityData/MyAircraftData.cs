@@ -8,7 +8,7 @@
 using System;
 using UnityEngine;
 
-namespace ZFight
+namespace Game
 {
     [Serializable]
     public class MyAircraftData : AircraftData

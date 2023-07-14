@@ -1,0 +1,157 @@
+-- des:{网络管理类}
+-- author:{ddz}
+-- date: 2021-06-04 14:50:00
+--
+HttpMgr = {}
+
+HttpMgr.curCDN = CS.JMatrix.CSNetUrlConfig.GetCDN()
+HttpMgr.curHost = CS.JMatrix.CSNetUrlConfig.GetHost()
+HttpMgr.service = GameEntry.Http
+HttpMgr.sortDic = CS.System.Collections.Generic.SortedDictionary(CS.System.String, CS.System.String)
+
+--登陆成功后会赋值
+HttpMgr.playerID = nil
+HttpMgr.paramDic = nil
+--<param name="url">请求路径</param>
+--<param name="callBack">成功失败回调，</param>
+--<param name="param">附加协议</param>
+--<param name="isForceWait">当前接口是否需要卡住游戏流程（会显示转菊花UI）</param>
+--<param name="timeout">与服务器传输超时时间</param>
+--<param name="connectTimeout">与服务器连接超时时间</param>
+--<param name="retryCount">重试次数</param>
+--<param name="showCommonMsg">重试失败后是否需要通用弹窗</param>
+function HttpMgr.ReqGet(url, callBack, param, isForceWait, timeout, connectTimeout, retryCount, showCommonMsg)
+    url = HttpMgr.curHost .. url
+    
+    local paramDic = HttpMgr.sortDic()
+    if param then
+        for k, v in pairs(param) do
+            paramDic:Add(tostring(k), tostring(v))
+        end
+    end
+    if not isForceWait then
+        isForceWait = false
+    end
+    if not timeout then
+        timeout = 15
+    end
+    if not connectTimeout then
+        connectTimeout = 15
+    end
+    if not retryCount then
+        retryCount = 3
+    end
+    if not showCommonMsg then
+        showCommonMsg = true
+    end
+    local callWarp = function(code, data)
+        if isForceWait then
+            CS.JMatrix.UICommonTools.NetCloseWaitUI()
+        end
+        if code == 0 then
+            local tab = rapidjson.decode(data)
+            if not tab then
+                HttpMgr.onErrorCode(url, -1, tab)
+                callBack(-1, nil)
+                return
+            end
+            if type(callBack) == "function" then
+                callBack(tab.error_code, tab.data)
+            end
+        else
+            if type(callBack) == "function" then
+                callBack(code, data)
+            end
+        end
+    end
+
+    if isForceWait then
+        CS.JMatrix.UICommonTools.NetOpenWaitUI()
+    end
+    HttpMgr.service:ReqGet(url, callWarp,paramDic, isForceWait, timeout, connectTimeout, retryCount, showCommonMsg)
+end
+
+--<param name="url">请求路径</param>
+--<param name="callBack">成功失败回调，</param>
+--<param name="param">附加协议</param>
+--<param name="isForceWait">当前接口是否需要卡住游戏流程（会显示转菊花UI）</param>
+--<param name="timeout">与服务器传输超时时间</param>
+--<param name="connectTimeout">与服务器连接超时时间</param>
+--<param name="retryCount">重试次数</param>
+--<param name="showCommonMsg">重试失败后是否需要通用弹窗</param>
+function HttpMgr.ReqPost(url, callBack, param, isForceWait, timeout, connectTimeout, retryCount, showCommonMsg)
+    url = HttpMgr.curHost .. url
+    --这里如果一帧发送多次请求,SortedDictionary参数会串掉,建议直接传luatable参数,c#用结构体映射 by:zpf
+    -- if not HttpMgr.paramDic then
+    --     HttpMgr.paramDic = HttpMgr.sortDic()
+    -- end
+    -- HttpMgr.paramDic:Clear()
+    local paramDic = HttpMgr.sortDic()
+    if param then
+        for k, v in pairs(param) do
+            paramDic:Add(tostring(k), tostring(v))
+        end
+    end
+    if not isForceWait then
+        isForceWait = false
+    end
+    if not timeout then
+        timeout = 15
+    end
+    if not connectTimeout then
+        connectTimeout = 15
+    end
+    if not retryCount then
+        retryCount = 3
+    end
+    if not showCommonMsg then
+        showCommonMsg = true
+    end
+    local callWarp = function(code, data)
+        if isForceWait then
+            CS.JMatrix.UICommonTools.NetCloseWaitUI()
+        end
+        if code == 0 then
+            local tab = rapidjson.decode(data)
+            if not tab then
+                HttpMgr.onErrorCode(url, -1, tab)
+                callBack(-1, nil)
+                return
+            end
+            HttpMgr.serverTime = tab.timestamp --服务器当前时间
+            HttpMgr.onErrorCode(url, tab.error_code, tab)
+            if type(callBack) == "function" then
+                callBack(tab.error_code, tab.data,tab.error_msg)
+            end
+        else
+            if type(callBack) == "function" then
+                callBack(code, data)
+            end
+        end
+    end
+    if isForceWait then
+        CS.JMatrix.UICommonTools.NetOpenWaitUI()
+    end
+    HttpMgr.service:ReqPost(url, callWarp, paramDic, isForceWait, timeout, connectTimeout, retryCount, showCommonMsg)
+end
+
+function HttpMgr.onErrorCode(url, code, data)
+    if code == 0 then
+        return
+    elseif code == 401 then
+        CommonTools.ShowCommonMsgBox(CommonConfig:getLanguage("lag_tips"),CommonConfig:getLanguage("lag_force_exit"),function()
+            Application.Quit(0)
+        end,CommonConfig:getLanguage("lag_confirm"))
+        return
+    elseif code == 6000006 then
+        CommonTools.ShowCommonMsgBox(CommonConfig:getLanguage("lag_tingfubiaoti"),CommonConfig:getLanguage("lag_tingfugonggao"),function()
+            Application.Quit(0)
+        end,CommonConfig:getLanguage("lag_confirm"))
+        return
+    else
+        CommonTools.ShowCommonMsgTip(CommonConfig:getLanguage(tostring(code)))
+    end
+    if data.error_msg then
+        LogError("请求错误：url:" ..url.." errorMsg:"..data.error_msg)
+    end
+end
