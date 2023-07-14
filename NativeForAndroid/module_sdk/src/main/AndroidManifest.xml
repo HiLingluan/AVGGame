@@ -1,0 +1,69 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.crazymaplestudio.sdk">
+
+    <application
+        android:networkSecurityConfig="@xml/network_security_config">
+
+        <!-- notch -->
+        <meta-data android:name="android.max_aspect"  android:value="2.4" />
+        <meta-data android:name="notch.config"        android:value="portrait|landscape" />
+        <meta-data android:name="android.notch_support" android:value="true" />
+
+        <!-- Adjust -->
+        <receiver
+            android:name="com.adjust.sdk.AdjustReferrerReceiver"
+            android:permission="android.permission.INSTALL_PACKAGES"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <!-- Adjust  -->
+
+        <!--fcm ===== start-->
+        <service
+            android:name="com.crazymaplestudio.sdk.firebase.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <!--fcm ===== end-->
+
+        <!--NetBroadcastReceiver start-->
+        <receiver android:name="com.crazymaplestudio.sdk.networkstate.NetBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!--appsflyer ===== start-->
+        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <uses-permission 
+    android:name="android.permission.ACCESS_COARSE_LOCATION" 
+    android:maxSdkVersion="22" />
+</manifest>

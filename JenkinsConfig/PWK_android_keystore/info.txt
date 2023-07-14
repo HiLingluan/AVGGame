@@ -1,0 +1,23 @@
+Magic(J2) cm1007 GooglePlay keystore
+======================================
+
+证书信息：
+
+storePassword 'StqylkzUp6zes'
+keyPassword 'StqylkzUp6zes'
+keyAlias "cms_keystore_100701"
+
+
+=======================================================
+
+证书生成命令：
+keytool -genkey -alias cms_keystore_100701 -keyalg RSA -validity 70000 -keystore cms_keystore_100701.keystore 
+
+keytool -importkeystore -srckeystore cms_keystore_100701.keystore -destkeystore cms_keystore_100701.keystore -deststoretype pkcs12
+
+
+证书信息查看：
+keytool -list  -v -keystore cms_keystore_100701.keystore -storepass 密码
+  
+FaceBook HashKey : 
+nBEmnyS+odEV+dR4bDOlNjgfz14=

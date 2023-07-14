@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">Magic</string>
+  <string name="game_view_content_description">Game view</string>
+
+  <!-- facebook 应用id-->
+  <string name="facebook_app_id">2531347660349673</string>
+  <!-- facebook 登录id-->
+  <string name="fb_login_protocol_scheme">fb2531347660349673</string>
+  <!-- google广告id -->
+  <string name="ad_admod_id">ca-app-pub-8061354412279216~9519514219</string>
+  <!-- applovin广告id -->
+  <string name="ad_applovin_id">AGASBVugtENsQAVi-STTBmB9Khvqgq9s4JJFqBxhPJXrT2XSU5xfr7qApi-UW8KbSdsGqnyE5U3ZWb0_gyfW3T</string>
+
+
+</resources>

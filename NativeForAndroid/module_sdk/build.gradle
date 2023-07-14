@@ -1,0 +1,105 @@
+apply plugin: 'com.android.library'
+
+
+def cms_sdk_version = "1.0.0"
+
+android {
+    compileSdkVersion Integer.parseInt(COMPILE_SDK_VERSION)
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion Integer.parseInt(MIN_SDK_VERSION)
+        targetSdkVersion Integer.parseInt(TARGET_SDK_VERSION)
+        versionCode 12
+        versionName "104.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            buildConfigField("String", "SDK_VERSION", "\"${cms_sdk_version}\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField("String", "SDK_VERSION", "\"${cms_sdk_version}\"")
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    implementation "androidx.multidex:multidex:2.0.0"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    testImplementation 'junit:junit:4.12'
+
+    //google
+    implementation 'com.google.android.gms:play-services-base:17.3.0'
+//    implementation 'com.google.android.gms:play-services-base:18.1.0'
+    implementation 'com.google.android.gms:play-services-auth:18.0.0'
+    implementation 'com.google.android.gms:play-services-analytics:17.0.0'
+    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+    //implementation 'com.google.android.gms:play-services-location:17.1.0'
+
+    //google pay
+    implementation "com.android.billingclient:billing:4.0.0"
+
+    //facebook
+    //implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
+    implementation 'com.facebook.android:facebook-android-sdk:11.3.0'
+    //facebook登陆
+    //implementation 'com.facebook.android:facebook-login:[5,6)'
+    //implementation 'com.facebook.android:facebook-login:8.2.0'
+
+    //firebase
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
+    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.0'
+    //implementation files('src/main/jniLibs/GoogleConversionTrackingSdk-2.2.4.jar')
+
+    //adjust
+    implementation 'com.adjust.sdk:adjust-android:4.25.0'
+    implementation 'com.android.installreferrer:installreferrer:2.2'
+
+    //appsflyer
+    implementation 'com.appsflyer:af-android-sdk:6.3.2'
+    implementation 'com.appsflyer:adrevenue:5.1.0'
+
+
+    //------------- Mopub SDK Start ----------
+    implementation('com.mopub:mopub-sdk-fullscreen:5.15.0@aar'){  //包含interstital 和 reward
+        transitive = true
+    }
+
+    // Facebook Audience Network
+    implementation 'com.facebook.android:audience-network-sdk:6.2.1'
+    implementation 'com.mopub.mediation:facebookaudiencenetwork:6.2.1.0'
+
+    // Google (AdMob & Ad Manager)
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    implementation 'com.mopub.mediation:admob:19.6.0.2'
+
+    // AppLovin
+    implementation 'com.applovin:applovin-sdk:9.15.2'
+    implementation 'com.mopub.mediation:applovin:9.15.2.0'
+    //------------- Mopub SDK End----------
+
+    // okhttp @TODO 需要找测试确认
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+
+    //greendao
+    //implementation 'org.greenrobot:greendao:3.2.2'
+}
