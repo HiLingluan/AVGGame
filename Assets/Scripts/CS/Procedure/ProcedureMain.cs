@@ -46,7 +46,7 @@ namespace Game
         {
             base.OnEnter(procedureOwner);
             var param = new EffectData(9, 10);
-            //GameEntry.Entity.ShowTestEffect(param);
+            GameEntry.Entity.ShowTestEffect(param);
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)

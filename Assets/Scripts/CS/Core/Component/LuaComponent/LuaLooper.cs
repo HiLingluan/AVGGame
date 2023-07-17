@@ -1,5 +1,4 @@
-﻿using JMatrix;
-using Loxodon.Framework;
+﻿using Loxodon.Framework;
 using System;
 using UnityEngine;
 using XLua;

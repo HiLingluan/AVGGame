@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace JMatrix.Editor
+namespace Game.Editor
 {
     [SerializeField]
     public class ResourceVersionInfo

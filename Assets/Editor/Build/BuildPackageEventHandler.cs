@@ -4,9 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityGameFramework.Editor.ResourceTools;
 
-namespace JMatrix.Editor
+namespace Game.Editor
 {
-    public sealed class JMatrixBuildPackageEventHandler : IBuildEventHandler
+    public sealed class BuildPackageEventHandler : IBuildEventHandler
     {
         string versionFilePath;
         public bool ContinueOnFailure

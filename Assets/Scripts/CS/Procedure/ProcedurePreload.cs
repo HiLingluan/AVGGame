@@ -54,7 +54,8 @@ namespace Game
 
             m_LoadedFlag.Clear();
 
-            PreloadResources();
+            //PreloadResources();
+            ChangeState<ProcedureMain>(procedureOwner);
         }
 
         protected override void OnLeave(ProcedureOwner procedureOwner, bool isShutdown)
