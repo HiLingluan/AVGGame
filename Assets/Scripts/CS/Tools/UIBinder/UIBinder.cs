@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using Game.UI;
 
 namespace Game.Editor
 {
@@ -34,7 +32,7 @@ namespace Game.Editor
                 {
                     continue;
                 }
-                GetString(propertyName, value, item.Note, item.ValueType, property, componentVar);
+                //GetString(propertyName, value, item.Note, item.ValueType, property, componentVar);
             }
             SaveFile(GetLuaScript(property.ToString(), componentVar.ToString()));
             AssetDatabase.Refresh();

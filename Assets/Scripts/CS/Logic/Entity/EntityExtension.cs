@@ -80,6 +80,11 @@ namespace Game
             entityComponent.ShowEntity(typeof(Effect), "Effect", Constant.AssetPriority.EffectAsset, data);
         }
 
+        public static void ShowTestEffect(this EntityComponent entityComponent, EffectData data)
+        {
+            entityComponent.ShowEntity(5555, typeof(Effect), AssetUtility.GetEntityAsset("AtlasTest"), "Effect", data);
+        }
+
         private static void ShowEntity(this EntityComponent entityComponent, Type logicType, string entityGroup, int priority, EntityData data)
         {
             if (data == null)

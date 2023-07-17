@@ -11,10 +11,8 @@ namespace Game.UI
     }
 
     [LuaCallCSharp]
-    public class LuaWindow
+    public class LuaWindow : Window
     {
-        private string name;
-
         public ScriptReference script;
         public VariableArray variables;
 

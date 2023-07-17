@@ -97,7 +97,7 @@ namespace Game
 
             if (m_ChangeToMenu) 
             {
-                ChangeState<ProcedureMenu>(procedureOwner);
+                //ChangeState<ProcedureMenu>(procedureOwner);
             }
             else
             {

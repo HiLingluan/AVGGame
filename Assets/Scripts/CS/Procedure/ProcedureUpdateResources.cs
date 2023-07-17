@@ -16,18 +16,11 @@ namespace Game
         private List<UpdateLengthData> m_UpdateLengthData = new List<UpdateLengthData>();
         private UpdateResourceForm m_UpdateResourceForm = null;
 
-        public override bool UseNativeDialog
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool UseNativeDialog => throw new System.NotImplementedException();
 
         protected override void OnEnter(ProcedureOwner procedureOwner)
         {
             base.OnEnter(procedureOwner);
-
             m_UpdateResourcesComplete = false;
             m_UpdateCount = procedureOwner.GetData<VarInt32>("UpdateResourceCount");
             procedureOwner.RemoveData("UpdateResourceCount");
@@ -41,22 +34,22 @@ namespace Game
             GameEntry.Event.Subscribe(ResourceUpdateChangedEventArgs.EventId, OnResourceUpdateChanged);
             GameEntry.Event.Subscribe(ResourceUpdateSuccessEventArgs.EventId, OnResourceUpdateSuccess);
             GameEntry.Event.Subscribe(ResourceUpdateFailureEventArgs.EventId, OnResourceUpdateFailure);
+            //if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)
+            //{
+            //    Log.Info("4G");
+            //    //GameEntry.UI.OpenDialog(new DialogParams
+            //    //{
+            //    //    Mode = 2,
+            //    //    Title = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.Title"),
+            //    //    Message = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.Message"),
+            //    //    ConfirmText = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.UpdateButton"),
+            //    //    OnClickConfirm = StartUpdateResources,
+            //    //    CancelText = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.QuitButton"),
+            //    //    OnClickCancel = delegate (object userData) { UnityGameFramework.Runtime.GameEntry.Shutdown(ShutdownType.Quit); },
+            //    //});
 
-            if (Application.internetReachability == NetworkReachability.ReachableViaCarrierDataNetwork)
-            {
-                GameEntry.UI.OpenDialog(new DialogParams
-                {
-                    Mode = 2,
-                    Title = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.Title"),
-                    Message = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.Message"),
-                    ConfirmText = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.UpdateButton"),
-                    OnClickConfirm = StartUpdateResources,
-                    CancelText = GameEntry.Localization.GetString("UpdateResourceViaCarrierDataNetwork.QuitButton"),
-                    OnClickCancel = delegate (object userData) { UnityGameFramework.Runtime.GameEntry.Shutdown(ShutdownType.Quit); },
-                });
-
-                return;
-            }
+            //    return;
+            //}
 
             StartUpdateResources(null);
         }
@@ -73,7 +66,6 @@ namespace Game
             GameEntry.Event.Unsubscribe(ResourceUpdateChangedEventArgs.EventId, OnResourceUpdateChanged);
             GameEntry.Event.Unsubscribe(ResourceUpdateSuccessEventArgs.EventId, OnResourceUpdateSuccess);
             GameEntry.Event.Unsubscribe(ResourceUpdateFailureEventArgs.EventId, OnResourceUpdateFailure);
-
             base.OnLeave(procedureOwner, isShutdown);
         }
 
@@ -93,12 +85,13 @@ namespace Game
         {
             if (m_UpdateResourceForm == null)
             {
-                m_UpdateResourceForm = Object.Instantiate(GameEntry.BuiltinData.UpdateResourceFormTemplate);
+                //m_UpdateResourceForm = Object.Instantiate(GameEntry.BuiltinData.UpdateResourceFormTemplate, GameEntry.Global.uiRoot.transform);
             }
 
             Log.Info("Start update resources...");
-            GameEntry.Resource.UpdateResources(OnUpdateResourcesComplete);
-            //GameEntry.Resource.UpdateResources("Base",OnUpdateResourcesComplete);
+
+            //GameEntry.Resource.UpdateResources(OnUpdateResourcesComplete);
+            GameEntry.Resource.UpdateResources("Base", OnUpdateResourcesComplete);
         }
 
         private void RefreshProgress()
@@ -110,8 +103,10 @@ namespace Game
             }
 
             float progressTotal = (float)currentTotalUpdateLength / m_UpdateTotalCompressedLength;
-            string descriptionText = GameEntry.Localization.GetString("UpdateResource.Tips", m_UpdateSuccessCount.ToString(), m_UpdateCount.ToString(), GetByteLengthString(currentTotalUpdateLength), GetByteLengthString(m_UpdateTotalCompressedLength), progressTotal, GetByteLengthString((int)GameEntry.Download.CurrentSpeed));
-            m_UpdateResourceForm.SetProgress(progressTotal, descriptionText);
+            string progressStr = Utility.Text.Format("{0:F2} %", progressTotal * 100);
+            //更新进度条
+            string downloadPercentStr = string.Format("{0}/{1}", GetByteLengthString(currentTotalUpdateLength), GetByteLengthString(m_UpdateTotalCompressedLength));
+            //m_UpdateResourceForm.SetProgress(progressTotal, downloadPercentStr, GetByteLengthString((int)GameEntry.Download.CurrentSpeed) + "/S", progressStr);
         }
 
         private string GetByteLengthString(long byteLength)
@@ -183,18 +178,7 @@ namespace Game
         private void OnResourceUpdateChanged(object sender, GameEventArgs e)
         {
             ResourceUpdateChangedEventArgs ne = (ResourceUpdateChangedEventArgs)e;
-
-            for (int i = 0; i < m_UpdateLengthData.Count; i++)
-            {
-                if (m_UpdateLengthData[i].Name == ne.Name)
-                {
-                    m_UpdateLengthData[i].Length = ne.CurrentLength;
-                    RefreshProgress();
-                    return;
-                }
-            }
-
-            Log.Warning("Update resource '{0}' is invalid.", ne.Name);
+            //m_UpdateResourceForm.UpdateSpeedText(GetByteLengthString((int)GameEntry.Download.CurrentSpeed) + "/S");
         }
 
         private void OnResourceUpdateSuccess(object sender, GameEventArgs e)
@@ -212,8 +196,6 @@ namespace Game
                     return;
                 }
             }
-
-            Log.Warning("Update resource '{0}' is invalid.", ne.Name);
         }
 
         private void OnResourceUpdateFailure(object sender, GameEventArgs e)
@@ -221,27 +203,28 @@ namespace Game
             ResourceUpdateFailureEventArgs ne = (ResourceUpdateFailureEventArgs)e;
             if (ne.RetryCount >= ne.TotalRetryCount)
             {
-                Log.Error("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.", ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
+                string content = string.Format("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.", ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
+                Log.Error(content);
                 return;
             }
             else
             {
-                Log.Info("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.", ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
+                string content = string.Format("Update resource '{0}' failure from '{1}' with error message '{2}', retry count '{3}'.", ne.Name, ne.DownloadUri, ne.ErrorMessage, ne.RetryCount.ToString());
+                Log.Info(content);
             }
 
-            for (int i = 0; i < m_UpdateLengthData.Count; i++)
-            {
-                if (m_UpdateLengthData[i].Name == ne.Name)
-                {
-                    m_UpdateLengthData.Remove(m_UpdateLengthData[i]);
-                    RefreshProgress();
-                    return;
-                }
-            }
+            //for (int i = 0; i < m_UpdateLengthData.Count; i++)
+            //{
+            //    if (m_UpdateLengthData[i].Name == ne.Name)
+            //    {
+            //        m_UpdateLengthData.Remove(m_UpdateLengthData[i]);
+            //        RefreshProgress();
+            //        return;
+            //    }
+            //}
 
             Log.Warning("Update resource '{0}' is invalid.", ne.Name);
         }
-
         private class UpdateLengthData
         {
             private readonly string m_Name;

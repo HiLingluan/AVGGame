@@ -113,16 +113,16 @@ namespace Game
             if (m_VersionInfo.ForceUpdateGame)
             {
                 // 需要强制更新游戏应用
-                GameEntry.UI.OpenDialog(new DialogParams
-                {
-                    Mode = 2,
-                    Title = GameEntry.Localization.GetString("ForceUpdate.Title"),
-                    Message = GameEntry.Localization.GetString("ForceUpdate.Message"),
-                    ConfirmText = GameEntry.Localization.GetString("ForceUpdate.UpdateButton"),
-                    OnClickConfirm = GotoUpdateApp,
-                    CancelText = GameEntry.Localization.GetString("ForceUpdate.QuitButton"),
-                    OnClickCancel = delegate (object userData) { UnityGameFramework.Runtime.GameEntry.Shutdown(ShutdownType.Quit); },
-                });
+                //GameEntry.UI.OpenDialog(new DialogParams
+                //{
+                //    Mode = 2,
+                //    Title = GameEntry.Localization.GetString("ForceUpdate.Title"),
+                //    Message = GameEntry.Localization.GetString("ForceUpdate.Message"),
+                //    ConfirmText = GameEntry.Localization.GetString("ForceUpdate.UpdateButton"),
+                //    OnClickConfirm = GotoUpdateApp,
+                //    CancelText = GameEntry.Localization.GetString("ForceUpdate.QuitButton"),
+                //    OnClickCancel = delegate (object userData) { UnityGameFramework.Runtime.GameEntry.Shutdown(ShutdownType.Quit); },
+                //});
 
                 return;
             }

@@ -31,8 +31,7 @@ namespace Game.UI
     [System.Serializable]
     public class VariableArray
     {
-        [SerializeField]
-        private List<Variable> variables;
+        public List<Variable> variables;
 
         public ReadOnlyCollection<Variable> Variables
         {
