@@ -6,7 +6,7 @@ namespace AssetDanshari
 {
     public class AssetDanshariWindow : EditorWindow
     {
-        [MenuItem("美术/资源引用检查")]
+        [MenuItem("Game Framework/资源引用检查")]
         static void ShowWindow()
         {
             GetWindow<AssetDanshariWindow>();
