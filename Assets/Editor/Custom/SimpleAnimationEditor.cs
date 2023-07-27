@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using Boo.Lang;
+using System.Collections.Generic;
 
 [CustomEditor(typeof(SimpleAnimation))]
 public class SimpleAnimationEditor : Editor

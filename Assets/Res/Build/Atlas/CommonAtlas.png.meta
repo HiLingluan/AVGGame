@@ -585,7 +585,7 @@ TextureImporter:
       213: -7904063053995633884
     second: selectlight_daoju
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -602,9 +602,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -636,10 +639,15 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -679,6 +687,30 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
     maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
@@ -4734,9 +4766,201 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      arrow_zi: 4683576199941290477
+      'tanchuang_qiehuan2 ': 7780810328947876014
+      selectlight_daoju: -7904063053995633884
+      btn_lan_98: 2773663889562255829
+      frame_card_addItemInventory: -220150276228559776
+      jiesuan_title_bg: -2291350229159932454
+      btn_qiehuan3-2: -1535991075743957056
+      btn_large _disable: 2359520766536921883
+      btn_qiehuan2-1: 9085804721447520249
+      suipian_loading_SR: -7885727649334809690
+      btn_lan_small: -9043677376723784586
+      TC_frame_hui: 4293103778030165525
+      btn_back: 459769931867043981
+      lingxing_zi: -2407566688566653969
+      S_minus: 3185542938821572411
+      icon_finished_lv: -722502679984861356
+      input_bg: 8095654655247225038
+      tag_Viktor: -4616929005149325482
+      tanchuang_N_01bg: -6881895877974539288
+      tanchuang_rb_hui_02: 8629102791509950525
+      icon_sanjiao_w2: 5509846665117271642
+      loading_lv: -7520323605533557659
+      btn_huang_small: -5373218157065429498
+      batch_btn_batch_disable: 4079584485324841060
+      num_2: -8741736759449166902
+      tag_Alistar: -7944688168324431936
+      icon_staheclear: -7916232468397808228
+      tanchuang_bg_huilan: -5320687674079805496
+      wupinkuang_mask: 7779634945246713068
+      title_bg: -8679802059208288567
+      haogandu: 4988871064192240893
+      batch_btn_batch: -7975784643934681973
+      btn_zi_large_N160b: 1351540961622107143
+      lingxing_hei: 2061242765870513736
+      ku: 265026454082400976
+      btn_chage: 1803185983674038531
+      btn_qiehuan1-2: 4997793154044992510
+      select_combat03: 8321861719980870409
+      tanchuang_fenge: 7543307115003551219
+      haogandu_frame: 8389334074880873868
+      tanchuang_nav_bg: -4620540309321954522
+      mask_round224: 6731912533032051106
+      pinzhi2: 1382045668444520914
+      icon_qianwang: 5451304418140456461
+      K_name: -5902684313939793791
+      btn_zi_large: -6665805305975848379
+      white_bg: 8391902243327126342
+      btn_zhong_large_N: -6529771688964118706
+      icon_yinliang100: -1620186202132227943
+      hongdian_xiao: -1460728638455422758
+      icon_cuo: 6965442657126637773
+      frame_card_UR: 1253422735440062196
+      bg_round_220: 7536090080214421466
+      icon_time: -6935235979808105029
+      'btn_huang_large ': 5944790294990516819
+      btn_zi_large_N148: -8249628713435651155
+      n_icon_b: -6372756451175285422
+      frame_ziyuan: 4066672853254776242
+      pinzhi1: -7566535872781750472
+      batch_btn_dab_Disabled: 2031610405743857227
+      btn_tioaguo: 8084623166047704598
+      tanchuang_qiehuan_an: -8849573491245576712
+      btn_jiasu_sanjiao1: -6923087150057198944
+      S_plus_sign2: -6258908403511609056
+      btn_back_hei: 8654969079872330715
+      btn_huang_large_N: 2314045513493219173
+      icon_suipian: 1260383734179155092
+      suipian_loading_N_bg: 1658511786358133011
+      gou_bg: -3432660507299837738
+      btn_home: 6336529507613937132
+      num_4: -8090542706501692443
+      shuxingicon_bg: 3573095218385509263
+      tanchuang_rb_hui: 5717638657891451285
+      suipian_loading_R: 4434024696664012955
+      btn_huang_large_N2: 7243162815916568582
+      btn_home_hei: -2853740902942456813
+      bg_Prop frame: -8401656380578219340
+      icon_sanjiao_w1: -3372261175152995544
+      tc_pull_down: -8299964211471305391
+      batch_loading: -8407328988881191914
+      btn_qiehuan2-2: 8014490954136782501
+      tanchuang_tab: 6196759320014984925
+      num_9: -2893824736915770460
+      select_xiao: 5960828838921603988
+      top_mask: 6035045488839681270
+      gou: 3774092232432628184
+      frame_card_N: 9202436794627038455
+      loading_bg: -923031458241605512
+      tanchuang_list_title_bg2: 1352484169780389031
+      tanchuang_N_02bg: 8394930711895617946
+      base_progress_bg: 8134311981477808918
+      num_7: 4559721802418485680
+      Black_frame_line: 5630142603306806665
+      icon_laiyuan: -9119176592131383865
+      tanchuang_rb_bai: -4158716710739524146
+      btn_jiasu_liang: -4633793005727059228
+      btn_help_bai: 2427965466793492092
+      arrow_kahua: -6092931593793041553
+      num_10: -4504019260443087967
+      bg_tc_001: 5058988891435799923
+      S_plus_sign: -3834037869187979948
+      'tanchuang_qiehuan ': 3498395818713025649
+      btn_help: 2235458803355840068
+      num_1: -5967588698049459522
+      btn_lan_large_N: 6214320437393528878
+      btn_lan_large_N_2: 1781867801807481088
+      b_gou_frame: 5561067341428736504
+      suipian_loading_SSR_bg: -8301413801496302874
+      icon_yinliang0: 1498411251299458591
+      lingqu_gou: 8690191228178004904
+      btn_history: 8374475161947867807
+      num_8: -8091355947993660247
+      num_6: -2352580425191025873
+      title_line_hei: 7319399244644643644
+      title_erji_bg: -3706096721360135308
+      batch_loading_bg: 3309898710365829957
+      bg_white_line: 5297368493881410257
+      btn_lan_68: -3505769755674049967
+      btn_zi_large_N160: 2745352474689015577
+      btn_zi_large_N160c: -4275306049092557595
+      select_items: 8472528187971166475
+      tanchuang_qiehuan2_an: 2446424304275825426
+      btn_lv_2: 3464752291670373613
+      pinzhi5: 278517674582933742
+      btn_copy: -3075935962142362234
+      suipian_loading_N: 6129098353896056873
+      tanchuang_bg_wenlu: 8027727957750955353
+      btn_lan_large_N2b: 6530429343520604716
+      bg_tc_001maks: -8819381854898444468
+      b_gou: 6973203013957026033
+      tag_Leonis: -2215258221392152699
+      btn_lv_2_an: 4045000117232387567
+      btn_tiaotuo: 2552921892899114235
+      btn_item_bg2: -3825592452599718647
+      tanchuang_list_bai: 8250088568765676640
+      btn_zi_large_N: -6460079655145276005
+      n_icon_s: 6970856556324138516
+      batch_btn_slider: 3841925549080685789
+      bg_white_line2: -8212222090078444440
+      icon_laiyuan_white: -6895954249668278256
+      btn_zi_large_N2: 9072266736108859481
+      frame_card_SR: -6468854904376051810
+      btn_zi_small: 5635032723134238322
+      suipian_loading_SR_bg: -8627766403089511991
+      btn_huang_duan: -6238965228960914663
+      icon_jindu1: 3578112628132996858
+      arrow: -2043017983467968750
+      gacha_jilu_0: 3745698357052008600
+      btn_item_bg_disable: -7651283440435169261
+      gacha_jilu_SSR: -3127191828676538872
+      'tanchuang_qiehuan_an ': 3244816419783126033
+      icon_jindu2: -2343816727364878094
+      frame_card_R: -8418626361616928052
+      white_frame30: 7807505051908833054
+      btn_buy: 5300877936742877120
+      num_3: 8219664417722280758
+      suipian_loading_R_bg: 1247508055200862542
+      bg_round_120: -4106427253231528168
+      tanchuang_bg_bai: 6472837776967497142
+      2_2square: 4305888734606069301
+      star_bg_combat05: 1839299842984794339
+      frame_card_SSR: 1890259808965221450
+      star_bg_combat06: -4313977956865569145
+      tips_bg: 2184701111758265390
+      tag_Oz: -1720057567588959263
+      tanchuang_bg: -7777184729559026512
+      tag_Jax: -394473942887192685
+      btn_small_disable: -6450771545305500331
+      btn_help_hei: -1736824360623983564
+      icon_dui: -8398304997373429114
+      'btn_lan_large ': -39240213363503323
+      hongdian: -808820357774417650
+      pinzhi3: 6339825059039295059
+      btn_home_bai: 6157735203064589339
+      gou_frame: -7543914020731146020
+      icon_finished_bai: -3221336909305046011
+      suipian_loading_SSR: -1424966863015069885
+      btn_back_bai: 1457998424138823271
+      hongdian_num: -222606533748730055
+      btn_gray_large_N: -3576123698998354554
+      tanchuang_bg_hei: 7406040348759822892
+      tanchuang_list_title_bg: -5003550643458187658
+      com_90: 6649029199125036764
+      jia: 5397642174000313001
+      tanchuang_bg_zi: -587997298603378118
+      btn_qiehuan1-1: -8271080679528218308
+      lock: 8464627282614862601
+      batch_btn_dab: -8107461248459880987
+      num_5: 3860269627671160696
+      btn_qiehuan3-1: -4771381683800380406
+      pinzhi4: -6195369396893719359
+      biezhen01: -1502787264459517036
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

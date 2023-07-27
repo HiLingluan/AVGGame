@@ -67,7 +67,7 @@ public class TextureImportChange : AssetPostprocessor
         TextureImporterPlatformSettings iosTs = importer.GetPlatformTextureSettings("iPhone");
         iosTs.overridden = true;
         iosTs.maxTextureSize = 2048;
-        iosTs.format = TextureImporterFormat.ASTC_RGB_4x4;//ASTC_RGBA_ 系统被禁止  错误避免是通过使用 ASTC_RGB_ 系统实现的。阿尔法判断似乎是自动的
+        iosTs.format = TextureImporterFormat.ASTC_4x4;//ASTC_RGBA_ 系统被禁止  错误避免是通过使用 ASTC_RGB_ 系统实现的。阿尔法判断似乎是自动的
         iosTs.resizeAlgorithm = TextureResizeAlgorithm.Bilinear;
         iosTs.compressionQuality = (int)TextureCompressionQuality.Best;
         importer.SetPlatformTextureSettings(iosTs);
@@ -106,7 +106,7 @@ public class TextureImportChange : AssetPostprocessor
         TextureImporterPlatformSettings iosTs = importer.GetPlatformTextureSettings("iPhone");
         iosTs.overridden = true;
         iosTs.maxTextureSize = 2048;
-        iosTs.format = TextureImporterFormat.ASTC_RGB_4x4;//ASTC_RGBA_ 系统被禁止  错误避免是通过使用 ASTC_RGB_ 系统实现的。阿尔法判断似乎是自动的
+        iosTs.format = TextureImporterFormat.ASTC_4x4;//ASTC_RGBA_ 系统被禁止  错误避免是通过使用 ASTC_RGB_ 系统实现的。阿尔法判断似乎是自动的
         iosTs.resizeAlgorithm = TextureResizeAlgorithm.Bilinear;
         iosTs.compressionQuality = (int)TextureCompressionQuality.Best;
         importer.SetPlatformTextureSettings(iosTs);
