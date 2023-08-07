@@ -1016,8 +1016,8 @@ TextureImporter:
     nameFileIdTable:
       icon_guodong: 5607586484861395970
       icon_touxk02: 4605396824826814346
-      icon_lihe_shiguanghupo: -8399439240452485053
       icon_SSRquan: -3622658875548907023
+      icon_haitai: -3480093274705184913
       icon_cong: -2379970441377161310
       icon_huangyou: -582207476667104772
       icon_bupi_green: -611716018900388816
@@ -1054,7 +1054,7 @@ TextureImporter:
       icon_touzi: 931989877095585746
       icon_jidan: -6277965414729225337
       icon_SRquan: -8865863044294869624
-      icon_haitai: -3480093274705184913
+      icon_lihe_shiguanghupo: -8399439240452485053
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
