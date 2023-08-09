@@ -1,20 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="Current" Sdk="Microsoft.NET.Sdk">
+  <!-- Generated file, do not modify, your changes will be overwritten (use AssetPostprocessor.OnGeneratedCSProject) -->
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultItems>false</EnableDefaultItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup>
+    <Configurations>Debug;Release</Configurations>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{2F6A91B9-98A5-DF3C-EFFE-D5F0C9CC5C99}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <BaseDirectory>.</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -22,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\Bin\Debug\</OutputPath>
-    <DefineConstants>UNITY_2022_2_5;UNITY_2022_2;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION</DefineConstants>
+    <DefineConstants>UNITY_2022_2_5;UNITY_2022_2;UNITY_2022;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_2_OR_NEWER;UNITY_2017_3_OR_NEWER;UNITY_2017_4_OR_NEWER;UNITY_2018_1_OR_NEWER;UNITY_2018_2_OR_NEWER;UNITY_2018_3_OR_NEWER;UNITY_2018_4_OR_NEWER;UNITY_2019_1_OR_NEWER;UNITY_2019_2_OR_NEWER;UNITY_2019_3_OR_NEWER;UNITY_2019_4_OR_NEWER;UNITY_2020_1_OR_NEWER;UNITY_2020_2_OR_NEWER;UNITY_2020_3_OR_NEWER;UNITY_2021_1_OR_NEWER;UNITY_2021_2_OR_NEWER;UNITY_2021_3_OR_NEWER;UNITY_2022_1_OR_NEWER;UNITY_2022_2_OR_NEWER;PLATFORM_ARCH_64;UNITY_64;UNITY_INCLUDE_TESTS;ENABLE_AR;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_EVENT_QUEUE;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_TEXTURE_STREAMING;ENABLE_VIRTUALTEXTURING;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_VR;ENABLE_WEBCAM;ENABLE_UNITYWEBREQUEST;ENABLE_WWW;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_EDITOR_GAME_SERVICES;ENABLE_UNITY_GAME_SERVICES_ANALYTICS_SUPPORT;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_HUB_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_GENERATE_NATIVE_PLUGINS_FOR_ASSEMBLIES_API;ENABLE_DIRECTOR_AUDIO;ENABLE_DIRECTOR_TEXTURE;ENABLE_MANAGED_JOBS;ENABLE_MANAGED_TRANSFORM_JOBS;ENABLE_MANAGED_ANIMATION_JOBS;ENABLE_MANAGED_AUDIO_JOBS;ENABLE_MANAGED_UNITYTLS;INCLUDE_DYNAMIC_GI;ENABLE_SCRIPTING_GC_WBARRIERS;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;ENABLE_VIDEO;ENABLE_ACCELERATOR_CLIENT_DEBUGGING;ENABLE_NAVIGATION_PACKAGE_DEBUG_VISUALIZATION;ENABLE_NAVIGATION_HEIGHTMESH_RUNTIME_SUPPORT;ENABLE_NAVIGATION_UI_REQUIRES_PACKAGE;PLATFORM_STANDALONE;TEXTCORE_1_0_OR_NEWER;PLATFORM_STANDALONE_WIN;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_NVIDIA;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_OUT_OF_PROCESS_CRASH_HANDLER;ENABLE_CLUSTER_SYNC;ENABLE_CLUSTERINPUT;PLATFORM_UPDATES_TIME_OUTSIDE_OF_PLAYER_LOOP;GFXDEVICE_WAITFOREVENT_MESSAGEPUMP;PLATFORM_INITIALIZES_MEMORY_MANAGER_EXPLICITLY;ENABLE_MONO;NET_4_6;NET_UNITY_4_8;ENABLE_PROFILER;DEBUG;TRACE;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_UNITY_COLLECTIONS_CHECKS;ENABLE_BURST_AOT;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_DIRECTOR;ENABLE_LOCALIZATION;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_TILEMAP;ENABLE_TIMELINE;ENABLE_INPUT_SYSTEM;ENABLE_LEGACY_INPUT_MANAGER;TEXTCORE_FONT_ENGINE_1_5_OR_NEWER;TextMeshPro;CSHARP_7_OR_LATER;CSHARP_7_3_OR_NEWER;UNITY_EDITOR_ONLY_COMPILATION</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -38,27 +36,27 @@
     <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-    <NoConfig>true</NoConfig>
+    <NoStandardLibraries>true</NoStandardLibraries>
     <NoStdLib>true</NoStdLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
-    <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
-    <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
+    <NoConfig>true</NoConfig>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <MSBuildWarningsAsMessages>MSB3277</MSBuildWarningsAsMessages>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.17</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.20</UnityProjectGeneratorVersion>
     <UnityProjectType>Editor:5</UnityProjectType>
-    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
+    <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2022.2.5f1c1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Users\55213\.vscode\extensions\visualstudiotoolsforunity.vstuc-0.9.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.2.5f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.SourceGenerators.dll" />
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.2.5f1c1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\LevenshteinDistance.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_LuaInterface_EventObject.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\AssetDanshariWatcher.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_BaseScreen.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\ApproximatelyEquals.cs" />
@@ -68,24 +66,26 @@
     <Compile Include="Assets\Scripts\CS\Tools\Extension\SpriteCollectionExtension\Editor\SpriteCollectionUtility.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\DldUtil_BigFileReader.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Tools_Scenes.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\EditorUtils.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\BRT_Util.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\BRT_WindowUtility.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Scripts\UI\ImageGallery\ImageGroupEditor.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBX\Utils.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\ToLuaTree.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Spreadsheet_Local.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\AssetDanshariHandlerDemo.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\JsonParser.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\DldUtil_UnityVersion.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_String.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\ReferenceWindow\AssetReferenceWindow.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\CompositeUIViewTransitionEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\DldUtil_BackwardFileReader.cs" />
     <Compile Include="Assets\Editor\Build\Command\Command.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBX\Sections.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\LocalizationEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Options\BRT_FiltersUsed.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\EditorUtils.cs" />
     <Compile Include="Assets\Editor\ResourceRuleEditor\ResourceRuleEditorUtility.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Core\Collections\SerializableDictionaryPropertyDrawer.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\AssetDanshariStyle.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Scripts\SpriteCropping\SpriteCropperEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\HammingDistance.cs" />
     <Compile Include="Assets\Editor\Build\BuildUpdateEventHandler.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\UpgradeManager.cs" />
@@ -97,65 +97,60 @@
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\DuplicateWindow\AssetDuplicateTreeModel.cs" />
     <Compile Include="Assets\Editor\UnityTable\Editor\SerializedPropertyDataStore.cs" />
     <Compile Include="Assets\Editor\UI\VariableDrawer.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_LuaInterface_EventObject.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\ToLuaTree.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\LongestCommonSubstring.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Terms.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\JaroDistance.cs" />
     <Compile Include="Assets\Editor\Build\Command\BuildUtilitys.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_Object.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Custom\CustomSettings.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\TermsPopup_Drawer.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\BRT_LibCacheUtil.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\DependenciesWindow\AssetDependenciesWindow.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\CompositeUIViewTransitionEditor.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBXProjectExtensions.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\AssetDanshariWindow.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_OptionsScreen.cs" />
     <Compile Include="Assets\3ThirdTools\SuperScrollView\Editor\LoopStaggeredGridViewEditor.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Scripts\UI\ImageGallery\ImageGroupListEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\OverlapCoefficient.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_Input.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Enum.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\ToLuaMenu.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\NovaMenu.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_Input.cs" />
     <Compile Include="Assets\Editor\UnityTable\Editor\CommonTreeView.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\SaveViewer.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_UnityBuildSettings.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_AssetListScreen_Delete.cs" />
     <Compile Include="Assets\Editor\UI\ScriptReferenceDrawer.cs" />
     <Compile Include="Assets\3ThirdTools\SuperScrollView\Editor\LoopListViewEditor2.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Custom\CustomSettings.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_BuildStepsScreen.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\BRT_VersionInfo.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\ToLuaMenu.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\DuplicateWindow\AssetDuplicateWindow.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\DuplicateWindow\AssetDuplicateTreeView.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Terms_Description.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportGeneration\BRT_ReportGenerator.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_RectTransform.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\ToLuaExport.cs" />
     <Compile Include="Assets\Editor\Custom\SimpleAnimationEditor.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\PostProcessBuild_UnloadLanguages.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBX\Elements.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\NovaBuildHooks.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Scripts\SpriteCropping\UncroppedSpritesEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_SizeStatsScreen.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Options\BRT_Options.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\ProjectCapabilityManager.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportGeneration\BRT_AssetDependencyGenerator.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\CharacterPoseComposer.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Type.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBXProjectData.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\ToLuaExport.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_RectTransform.cs" />
     <Compile Include="Assets\3ThirdTools\XLua\Editor\ExampleConfig.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBXProject.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Scripts\UI\ImageGallery\ImageGroupListEditor.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\TreeDataModel\AssetTreeView.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\DldUtil_GetRspDefines.cs" />
-    <Compile Include="Assets\Scripts\CS\Tools\SerializableDictionary\Editor\SerializableDictionaryExampleEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_HelpScreen.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\Operations.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PlistParser.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\NovaConst.cs" />
     <Compile Include="Assets\Scripts\CS\Tools\Extension\SpriteCollectionExtension\Editor\SpriteCollectionEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\TanimotoCoefficient.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Scripts\SpriteCropping\UncroppedSpritesEditor.cs" />
     <Compile Include="Assets\Editor\LuaSettingsProvider.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportGeneration\BRT_ReportGenerator_PublicAPI.cs" />
     <Compile Include="Assets\3ThirdTools\SuperScrollView\Editor\LoopGridViewEditor.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\NovaConst.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBX\Serializer.cs" />
     <Compile Include="Assets\Editor\Build\Android\BuildAndroid.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportGeneration\BRT_TextureDataGenerator.cs" />
@@ -165,16 +160,15 @@
     <Compile Include="Assets\Editor\UnityTable\Editor\SerializedPropertyTreeView.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\ReferenceWindow\AssetReferenceTreeModel.cs" />
     <Compile Include="Assets\Editor\UnityTable\Editor\Styles.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_Object.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\RatcliffObershelpSimilarity.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_SizePart.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_UnityBuildReport.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Delegate.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_IDataFile.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\LocalizeInspector.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Tools.cs" />
     <Compile Include="Assets\Scripts\CS\Tools\Extension\SpriteCollectionExtension\Editor\PreprocessBuildHandle.cs" />
     <Compile Include="Assets\Editor\Build\BuildPackageEventHandler.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Object.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBX\Parser.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\SetLanguageInspector.cs" />
     <Compile Include="Assets\Editor\UnityTable\Editor\SerializedPropertyTable.cs" />
@@ -187,19 +181,16 @@
     <Compile Include="Assets\3ThirdTools\XLua\Editor\XLuaConfig.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_BuildInfo.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\LanguageSourceAssetInspector.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Scripts\UI\MusicGallery\MusicEntryListEditor.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBXCapabilityType.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Scripts\UI\ImageGallery\ImageGroupCapturer.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBX\Objects.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_GameObject.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\DldUtil_TraverseDirectory.cs" />
     <Compile Include="Assets\Editor\UnityTable\Editor\CommonTreeViewItem.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Warnings.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Tools_Script.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\LanguageSourceInspector.cs" />
     <Compile Include="Assets\Editor\UI\VariableArrayDrawer.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\SimpleEntryListEditor.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\LocalizationParamsManagerInspector.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Scripts\UI\ImageGallery\ImageGroupEditor.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\AssetCatalog.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\AssetDanshariHandler.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\DependenciesWindow\AssetDependenciesTreeView.cs" />
@@ -208,6 +199,7 @@
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\JaroWinklerDistance.cs" />
     <Compile Include="Assets\Editor\UnityTable\Editor\SerializedPropertyFilters.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Tools_NoLocalized.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Scripts\UI\ImageGallery\ImageGroupCapturer.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\TreeDataModel\AssetTreeModel.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Languages.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\LocalizeDropdownInspector.cs" />
@@ -217,26 +209,27 @@
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_AssetListScreen.cs" />
     <Compile Include="Assets\3ThirdTools\codeandweb.com\Editor\UIImageSetSizeAndPivot.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Inspectors\ResourceManagerInspector.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Enum.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\CharacterPoseComposer.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Scripts\UI\MusicGallery\MusicEntryListEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Options\BRT_FileFilters.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\TreeDataModel\AssetMultiColumnHeader.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_String.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_TextureData.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_UnityEngine_GameObject.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\SaveViewer.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBX\Lexer.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Core\Collections\SerializableDictionaryPropertyDrawer.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_AssetList.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Tools_CharSet.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\EditorTools.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_BuildSettingsCategoryType.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Spreadsheet_Google.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Scripts\SpriteCropping\SpriteCropperEditor.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\AssetDanshariSetting.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Type.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\TreeDataModel\AssetTreeViewItem.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\SimpleEntryListEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\BRT_AssetList_Sort_Texture.cs" />
     <Compile Include="Assets\Editor\ResourceRuleEditor\ResourceRuleEditor.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Tools_MergeTerms.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Object.cs" />
     <Compile Include="Assets\Editor\UI\UIWindowEditor.cs" />
     <Compile Include="Assets\Editor\Import\Res2AssetBundleImport.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\PostProcessBuild_ANDROID.cs" />
@@ -248,17 +241,19 @@
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\FuzzyStringComparisonTolerance.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\PBXPath.cs" />
     <Compile Include="Assets\3ThirdTools\I2\Localization\Scripts\Editor\Localization\LocalizationEditor_Tools_Categorize.cs" />
-    <Compile Include="Assets\Scripts\FrameWork\Nova\Nova\Editor\Scripts\UI\MusicGallery\MusicEntryEditor.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\JaccardDistance.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Window\Screen\BRT_OverviewScreen.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\ReportData\BRT_BuildPlatformType.cs" />
-    <Compile Include="Assets\Scripts\CS\Tools\SerializableDictionary\Editor\SerializableDictionaryPropertyDrawer.cs" />
     <Compile Include="Assets\3ThirdTools\AssetInspectionTool\Editor\ReferenceWindow\AssetReferenceTreeView.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\NovaBuildHooks.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\Utility\ImageDimensions.cs" />
     <Compile Include="Assets\3ThirdTools\BuildReport\Scripts\Editor\FuzzyString\FuzzyStringComparisonOptions.cs" />
     <Compile Include="Assets\Editor\Import\Res2TextureImport.cs" />
     <Compile Include="Assets\Editor\Build\XcodeStting\XcScheme.cs" />
     <Compile Include="Assets\3ThirdTools\XLua\Src\Editor\Hotfix.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\ThirdParty\ToLua\Extend\ToLua_System_Delegate.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\NovaMenu.cs" />
+    <Compile Include="Assets\Nova\Nova\Editor\Scripts\UI\MusicGallery\MusicEntryEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\3ThirdTools\XLua\Src\Editor\Template\LuaInterfaceBridge.tpl.txt" />
@@ -554,7 +549,7 @@
       <HintPath>Assets\3ThirdTools\DOTween\DOTween.dll</HintPath>
     </Reference>
     <Reference Include="Debugger">
-      <HintPath>Assets\Scripts\FrameWork\Nova\Nova\Sources\ThirdParty\ToLua\Plugins\Debugger.dll</HintPath>
+      <HintPath>Assets\Nova\Nova\Sources\ThirdParty\ToLua\Plugins\Debugger.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.8.2\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
@@ -562,14 +557,11 @@
     <Reference Include="Unity.Burst.Cecil">
       <HintPath>Library\PackageCache\com.unity.burst@1.8.2\Unity.Burst.CodeGen\Unity.Burst.Cecil.dll</HintPath>
     </Reference>
-    <Reference Include="TexturePackerImporter">
-      <HintPath>Assets\3ThirdTools\codeandweb.com\Editor\TexturePackerImporter.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.iOS_I2Loc.Xcode">
       <HintPath>Assets\3ThirdTools\I2\Localization\Scripts\Editor\Unity XCode\UnityEditor.iOS_I2Loc.Xcode.dll</HintPath>
     </Reference>
     <Reference Include="CString">
-      <HintPath>Assets\Scripts\FrameWork\Nova\Nova\Sources\ThirdParty\ToLua\Plugins\CString.dll</HintPath>
+      <HintPath>Assets\Nova\Nova\Sources\ThirdParty\ToLua\Plugins\CString.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
@@ -991,23 +983,20 @@
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.AI.Navigation">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="LoopScrollRect.Runtime">
       <HintPath>Library\ScriptAssemblies\LoopScrollRect.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    <Reference Include="Unity.ShaderGraph.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
@@ -1021,6 +1010,9 @@
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="LoopScrollRect.Editor">
+      <HintPath>Library\ScriptAssemblies\LoopScrollRect.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
@@ -1033,14 +1025,8 @@
     <Reference Include="Unity.InputSystem">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
-    <Reference Include="LoopScrollRect.Editor">
-      <HintPath>Library\ScriptAssemblies\LoopScrollRect.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Updater">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Updater.dll</HintPath>
     </Reference>
     <Reference Include="PPv2URPConverters">
       <HintPath>Library\ScriptAssemblies\PPv2URPConverters.dll</HintPath>
@@ -1048,17 +1034,11 @@
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.AI.Navigation.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Searcher.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.AI.Navigation.Editor.ConversionSystem">
-      <HintPath>Library\ScriptAssemblies\Unity.AI.Navigation.Editor.ConversionSystem.dll</HintPath>
+    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+      <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
@@ -1068,50 +1048,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{5A7C1C9C-EEF3-8CFE-1DD3-D03904608EA0}</Project>
-      <Name>Assembly-CSharp</Name>
-    </ProjectReference>
-    <ProjectReference Include="Nova.csproj">
-      <Project>{08740D6F-79ED-953E-7F94-A111016B93F1}</Project>
-      <Name>Nova</Name>
-    </ProjectReference>
-    <ProjectReference Include="BestHTTP.csproj">
-      <Project>{F37C94BB-135E-F21E-1042-A2462FD2BF4B}</Project>
-      <Name>BestHTTP</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityGameFramework.Runtime.csproj">
-      <Project>{1F737A43-B78D-14D7-712B-76BA4489298F}</Project>
-      <Name>UnityGameFramework.Runtime</Name>
-    </ProjectReference>
-    <ProjectReference Include="Coffee.UIParticle.csproj">
-      <Project>{90C678D8-CF02-C66A-3F85-E77CF6B93A39}</Project>
-      <Name>Coffee.UIParticle</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityGameFramework.Editor.csproj">
-      <Project>{828262F9-8209-17FC-D919-583B20D7CA37}</Project>
-      <Name>UnityGameFramework.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="GameFramework.csproj">
-      <Project>{D007C545-C017-1B8B-1911-BE8F78F36B95}</Project>
-      <Name>GameFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{AD218478-7BB1-DE52-7B7F-AAAF8918D570}</Project>
-      <Name>Unity.TextMeshPro</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
-      <Project>{219BDCB9-054A-5B59-7F58-3EB83312940B}</Project>
-      <Name>Unity.TextMeshPro.Editor</Name>
-    </ProjectReference>
+    <ProjectReference Include="Assembly-CSharp.csproj" />
+    <ProjectReference Include="BestHTTP.csproj" />
+    <ProjectReference Include="UnityGameFramework.Runtime.csproj" />
+    <ProjectReference Include="Coffee.UIParticle.csproj" />
+    <ProjectReference Include="UnityGameFramework.Editor.csproj" />
+    <ProjectReference Include="GameFramework.csproj" />
+    <ProjectReference Include="Nova.csproj" />
+    <ProjectReference Include="Unity.TextMeshPro.csproj" />
+    <ProjectReference Include="Unity.TextMeshPro.Editor.csproj" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="GenerateTargetFrameworkMonikerAttribute" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
